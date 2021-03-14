@@ -8,6 +8,7 @@ using namespace std;
 
 class Player {
     private :
+        string name;
         // Position playerPos;
         // Engimon active;
         // Inventory playerInventory;
