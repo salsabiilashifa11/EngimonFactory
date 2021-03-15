@@ -10,7 +10,8 @@ Map::Map() {
     }
 }
 
-Map::Map(string _filename) {
+Map::Map(string _filename, Player& _player) {
+    player = _player;
     filename = _filename;
     string line_input;
     int i = 0;
@@ -19,8 +20,6 @@ Map::Map(string _filename) {
     if (!file) {
         throw "File not found!";
     }
-
-    cout << "got here\n";
     
     while (file && i < MAP_HEIGHT - 1) {
         getline(file, line_input);
@@ -86,5 +85,10 @@ CellType Map::getType(char c) {
     }
     return type;
 }
+
+void Map::updateMap() {
+    map[player.getPosition().getX()][player.getPosition().getY()].setPlayer(player);
+}
+
 
 // Engimon Map::getOccupierE(char c);

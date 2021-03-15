@@ -1,1 +1,1 @@
-g++ -o main main.cpp Map.cpp Cell.cpp
+g++ -o main main.cpp Map.cpp Cell.cpp Player.cpp Position.cpp

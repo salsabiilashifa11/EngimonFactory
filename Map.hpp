@@ -5,6 +5,7 @@
 #include <iostream>
 #include <fstream>
 #include "Cell.hpp"
+#include "Player.hpp"
 
 using namespace std;
 
@@ -17,10 +18,11 @@ class Map {
         int width;
         int height;
         string filename;
+        Player player;
 
     public:
         Map();
-        Map(string _filename);
+        Map(string _filename, Player& _player);
         ~Map();
 
         //Getter
@@ -29,8 +31,9 @@ class Map {
         //Methods
         void drawMap();
         CellType getType(char c);
+        void updateMap();
         // Engimon getOccupierE(char c);
-        //void saveMap();
+        // void saveMap();
         
 
 };

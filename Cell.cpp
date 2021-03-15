@@ -25,15 +25,24 @@ CellType Cell::getType() {
     return type;
 }
 
+void Cell::setPlayer(Player& p) {
+    occupierP = p;
+}
+
 //Method
 void Cell::drawCell() {
-    // if (occupierE == NULL && occupierP == NULL) {
-    if (type == Sea) {
-        cout << "o";
+    if (occupierP.getName() == "") {
+        if (type == Sea) {
+            cout << "o";
+        } else {
+            cout << "-";
+        }
     } else {
-        cout << "-";
+        cout << "P";
     }
-    // }
+    
+    //check for occupiers;
+
 }
 
 void Cell::printInfo() {

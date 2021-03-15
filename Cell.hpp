@@ -4,6 +4,8 @@
 #include <stdio.h>
 #include <iostream>
 
+#include "Player.hpp"
+
 using namespace std;
 
 enum CellType {Grassland, Sea};
@@ -14,7 +16,7 @@ class Cell {
         int y; //y coordinate
         CellType type; //Grassland or sea
         //Engimon occupierE
-        //Player occupierP
+        Player occupierP;
 
     public:
         Cell();
@@ -24,6 +26,9 @@ class Cell {
         int getX();
         int getY();
         CellType getType();
+
+        //Setter
+        void setPlayer(Player& p);
 
         //Method
         void drawCell();

@@ -2,27 +2,28 @@
 #define _ENGIMON_HPP_
 
 #include <string>
-
+#include <array>
 #include "Skill.hpp"
 
 class Engimon {
    protected:
     string name;
-    string* parentName;
     string species;
     Skill* skill;
-    string* elements;
+    int nSkill;
+    string elements[5];
+    int nElements;
     int level;
     int experience;
     int cumulativeExperience;
-    string nature;
-    string ability;
+    //mapping species dengan skill unik pake stl
 
    public:
     Engimon();
+    // Engimon(string name, const Engimon mother, const Engimon father);
     virtual ~Engimon();
     void levelUp();
-    int increaseXP();
+    void increaseXP(int);
     //void interact();
 
     virtual void displayDetail() = 0;  //berisi semua informasi atribut engimon
@@ -30,9 +31,6 @@ class Engimon {
     //Getter and setter
     string getName();
     void setName(string);
-
-    string getParentName();
-    void setParentName(string);
 
     string getSpecies();
     void setSpecies(string);
@@ -44,19 +42,13 @@ class Engimon {
     void setExperience(int);
 
     int getCumulativeExperience();
-    void setCumulativeExperience();
+    void setCumulativeExperience(int);
 
-    string getNature();
-    void setNature(string);
-
-    string getAbility();
-    void setAbility(string);
-
-    void setSkill(Skill);
+    void addSkill(const Skill&);
     Skill* getSkill();
 
     string* getElements();
-    void setElements(string*);
+    void addElements(string);
 };
 
 #endif
