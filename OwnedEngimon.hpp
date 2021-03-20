@@ -2,19 +2,25 @@
 #define _OWNED_ENGIMON_HPP_
 
 #include <string>
-
-#include "Cell.hpp"
+#include <iterator>
+#include <map>
+#include "Position.hpp"
 #include "Engimon.hpp"
+#include "ElementAdvantage.hpp"
 
 // == ACTIVE ENGIMON
 class OwnedEngimon : public Engimon {
    private:
-    string parentName[2];
+    string *parentName;
     string status;
-    Cell position;
+    Position position;
     //mapping species dengan message unik pake stl
+    // static map<int, string> percakapan;
+    float getStrongestEl(string enemyEl);
+    
 
    public:
+    OwnedEngimon();
     OwnedEngimon(string name, string species);
     ~OwnedEngimon();
 
@@ -24,13 +30,15 @@ class OwnedEngimon : public Engimon {
     string getStatus();
     void setStatus(string);
 
-    Cell getPosition();
-    //void setPosition(int, int);
+    Position getPosition();
+    void setPosition(int, int);
 
     void interact();
     void moveActive(int x, int y);
 
     void displayDetail();
+
+    bool fight(Engimon& enemy);
 };
 
 #endif

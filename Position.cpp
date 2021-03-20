@@ -39,3 +39,9 @@ void Position::setX(int _x) {
 void Position::setY(int _y) {
     y = _y;
 }
+
+//Methods
+void Position::print() {
+    cout << "X: " << x << endl;
+    cout << "Y: " << y << endl;
+}

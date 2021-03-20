@@ -6,7 +6,6 @@
 #include <fstream>
 #include "Cell.hpp"
 #include "Player.hpp"
-
 using namespace std;
 
 #define MAP_WIDTH 30
@@ -27,6 +26,7 @@ class Map {
 
         //Getter
         Cell getCell(int x, int y);
+        Player& getPlayer();
 
         //Methods
         void drawMap();

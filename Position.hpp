@@ -27,6 +27,9 @@ class Position {
         void setX(int _x);
         void setY(int _y);
 
+        //Methods
+        void print();
+
 };
 
 #endif

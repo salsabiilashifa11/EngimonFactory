@@ -7,7 +7,8 @@
 #include "Position.hpp"
 #include "Engimon.hpp"
 #include "OwnedEngimon.hpp"
-#include "Inventory.hpp"
+// #include "Inventory.hpp"
+// #include "SkillItems.hpp"
 
 using namespace std;
 
@@ -15,10 +16,10 @@ class Player {
     private :
         string name;
         Position playerPos;
-        // Engimon active;
+        OwnedEngimon active;
         // Inventory playerInventory;
         int activeIndex;
-        Inventory<OwnedEngimon> playerEngimons;
+        // Inventory<OwnedEngimon> playerEngimons;
         // Inventory<SkillItems> playerItems;
 
     public :
@@ -31,21 +32,19 @@ class Player {
 
         // Commands
         void Move(char _direction);
-        void changeEngimon();
-        Engimon Breed(Engimon father, Engimon mother);
-        void Battle();
+        bool validMove(char _direction);
+        // void changeEngimon();
+        OwnedEngimon Breed(Engimon& father, Engimon& mother);
         // void checkEngimon();
-        // void useItem(Item);
-        // Interact
+        // void useItem(SkillItems);
 
-        // display
-        void displayEngimon();
-        void displaySkillItem();
-        void detailEngimon();
+        // // display
+        // void displayEngimon();
+        // void displaySkillItem();
+        // void detailEngimon();
 
         // Getter Setter
-        // Engimon getActiveEngimon();
-        // Position getPosition();
+        OwnedEngimon getActiveEngimon();
         string getName();
         int getActiveIndex();
         Position getPosition() const;
@@ -53,7 +52,7 @@ class Player {
         void setPosition(int _x, int _y);
         void setActiveIndex(int i);
 
-        void addToInventory(OwnedEngimon el);
+        // void addToInventory(OwnedEngimon el);
         // void addToInventory(SkillItems el);
 };
 

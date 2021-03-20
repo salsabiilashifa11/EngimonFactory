@@ -1,9 +1,11 @@
 #ifndef _ENGIMON_HPP_
 #define _ENGIMON_HPP_
 
+#include <stdlib.h>
 #include <string>
 #include <array>
 #include "Skill.hpp"
+using namespace std;
 
 class Engimon {
    protected:
@@ -11,7 +13,7 @@ class Engimon {
     string species;
     Skill* skill;
     int nSkill;
-    string elements[5];
+    string* elements;
     int nElements;
     int level;
     int experience;
@@ -49,6 +51,15 @@ class Engimon {
 
     string* getElements();
     void addElements(string);
+
+    int getNSkill();
+    void setNSkill(int);
+
+    bool isMemberSkill(string);
+
+    void swap(Skill* a, Skill* b);
+    int partition (Skill* arr, int low, int high);
+    void quickSort(Skill* arr, int low, int high);
 };
 
 #endif

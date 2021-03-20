@@ -1,10 +1,10 @@
 #include <iostream>
 #include "SkillItems.hpp"
+#include "Skill.hpp"
 using namespace std;
 
 SkillItems::SkillItems(){
-    Skill s;
-    item_skill = s;
+    Skill item_skill;
     quantity =1;
 }
 
@@ -25,3 +25,15 @@ SkillItems& SkillItems::operator=(const SkillItems& si){
 }
 
 SkillItems::~SkillItems(){}
+
+int SkillItems::getQuantity() const {
+    return this->quantity;
+}
+
+void SkillItems::addQuantity(int n) {
+    this->quantity += n;
+}
+
+string SkillItems::getName() {
+    return item_skill.getSkillName();
+}

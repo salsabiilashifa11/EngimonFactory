@@ -3,7 +3,7 @@
 #include <iostream>
 #include <string>
 using namespace std;
-#include "Engimon.hpp"
+// #include "OwnedEngimon.hpp"
 
 //list of species dengan skillnya
 class Skill {
@@ -35,7 +35,9 @@ class Skill {
     int getMasteryLevel();
     void setMasteryLevel(int);
 
-    void learn(Engimon);
+    Skill& getMaxMasteryLevel(Skill&);
+
+    // void learn(OwnedEngimon);
 };
 
 #endif

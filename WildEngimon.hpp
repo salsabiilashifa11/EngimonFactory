@@ -2,16 +2,15 @@
 #define _WILD_ENGIMON_HPP_
 
 #include <string>
-
 #include "Cell.hpp"
-#include "Engimon.hpp
+#include "Engimon.hpp"
 
 class WildEngimon : public Engimon {
    private:
     string status;
     Cell position;
    public:
-    WildEngimon(/* args */);
+    WildEngimon();
     ~WildEngimon();
 
     string getStatus();

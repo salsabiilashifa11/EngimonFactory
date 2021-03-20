@@ -4,6 +4,7 @@
 #include <string>
 #include <iostream>
 #include <vector>
+#include "SkillItems.hpp"
 using namespace std;
 
 template <class T>
@@ -22,20 +23,46 @@ class Inventory {
         }
         void displayAll() const{
             for (int i = 0; i < container.size(); i++) {
-                container[i].display();
+                cout << i+1 << ". " << container[i].getName();
             }
         }
         int n_elmt() const{
             return container.size();
         }
-        T findByName(string name) {
+        int indexByName(string name) {
+            for (int i = 0; i < container.size(); i++) {
+                if (container[i].getName().compare(name) == 0) {
+                    return i;
+                }
+            }
 
+            return -1;
         }
 
     private:
         vector<T> container;
 };
 
+template<>
+int Inventory<SkillItems>::n_elmt() const{
+    int sum = 0;
+    for (int i = 0; i < container.size(); i++) {
+        sum += container.at(i).getQuantity();
+    }
+
+    return sum;
+}
+
+template<>
+void Inventory<SkillItems>::append(SkillItems el) {
+    int idx = indexByName(el.getName());
+    if (idx != -1) {
+        container[idx].addQuantity(1);
+    }
+    else {
+        container.push_back(el);
+    }
+}
 // template<class T> 
 // T Inventory<T>::operator[](int i) {
 //     return container.at(i);

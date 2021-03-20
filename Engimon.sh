@@ -1,0 +1,1 @@
+g++ -o tesEngimon mainmain.cpp Skill.cpp Engimon.cpp OwnedEngimon.cpp Position.cpp

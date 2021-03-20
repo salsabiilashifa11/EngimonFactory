@@ -84,3 +84,11 @@ int Skill::getMasteryLevel(){
 void Skill::setMasteryLevel(int masteryLevel){
     this->masteryLevel = masteryLevel;
 }
+
+Skill& Skill::getMaxMasteryLevel(Skill& other){
+    if (this->getMasteryLevel() > other.getMasteryLevel()){
+        return *this;
+    } else {
+        return other;
+    }
+}

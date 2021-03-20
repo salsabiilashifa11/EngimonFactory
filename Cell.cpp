@@ -31,6 +31,7 @@ void Cell::setPlayer(Player& p) {
 
 //Method
 void Cell::drawCell() {
+    //Check for playe occupiers
     if (occupierP.getName() == "") {
         if (type == Sea) {
             cout << "o";

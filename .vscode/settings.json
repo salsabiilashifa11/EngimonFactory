@@ -48,6 +48,10 @@
     "streambuf": "cpp",
     "typeinfo": "cpp",
     "bitset": "cpp",
-    "locale": "cpp"
+    "locale": "cpp",
+    "filesystem": "cpp",
+    "map": "cpp",
+    "__tree": "cpp",
+    "ios": "cpp"
   }
 }

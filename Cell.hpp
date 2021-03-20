@@ -3,9 +3,7 @@
 
 #include <stdio.h>
 #include <iostream>
-
 #include "Player.hpp"
-
 using namespace std;
 
 enum CellType {Grassland, Sea};

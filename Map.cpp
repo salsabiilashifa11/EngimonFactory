@@ -44,6 +44,10 @@ Cell Map::getCell(int x, int y) {
     return map[x][y];
 }
 
+Player& Map::getPlayer() {
+    return player;
+}
+
 //Methods
 void Map::drawMap() {
     for (int i = 0; i < MAP_HEIGHT; i++) {
@@ -87,6 +91,12 @@ CellType Map::getType(char c) {
 }
 
 void Map::updateMap() {
+    Player temp;
+    for (int i = 0; i < MAP_HEIGHT; i++) {
+        for (int j = 0; j < MAP_WIDTH; j++) {
+            map[i][j].setPlayer(temp);
+        }
+    }
     map[player.getPosition().getX()][player.getPosition().getY()].setPlayer(player);
 }
 
