@@ -52,6 +52,7 @@
     "filesystem": "cpp",
     "map": "cpp",
     "__tree": "cpp",
-    "ios": "cpp"
+    "ios": "cpp",
+    "__functional_base": "cpp"
   }
 }

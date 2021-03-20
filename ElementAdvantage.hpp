@@ -1,3 +1,6 @@
+#ifndef _ELEMENT_ADVANTAGE_HPP_
+#define _ELEMENT_ADVANTAGE_HPP_
+
 #include <iostream>
 
 using namespace std;
@@ -90,6 +93,9 @@ class ElementAdvantage {
                     return 1;
                 }
             }
-        }
 
+            return 0;
+        }
 };
+
+#endif

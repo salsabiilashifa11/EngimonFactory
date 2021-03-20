@@ -1,5 +1,7 @@
 #include "OwnedEngimon.hpp"
 
+map<string, string> OwnedEngimon::percakapan = {{"fire","halo saya api"}, {"water","halo saya air"}, {"lightning","halo saya listrik"}, {"ground","halo saya tanah"}, {"ice","halo saya es"}};
+
 OwnedEngimon::OwnedEngimon() : Engimon() {
     this->status = "owned";
     this->parentName = new string[2];
@@ -45,12 +47,12 @@ void OwnedEngimon::setPosition(int x, int y){
 }
 
 void OwnedEngimon::interact(){
-    map<string, string> percakapan;
-    percakapan.insert(pair<string, string> ("fire","halo saya api"));
-    percakapan.insert(pair<string, string> ("water","halo saya air"));
-    percakapan.insert(pair<string, string> ("lightning","halo saya listrik"));
-    percakapan.insert(pair<string, string> ("ground","halo saya tanah"));
-    percakapan.insert(pair<string, string> ("ice","halo saya es"));
+    // map<string, string> percakapan;
+    // percakapan.insert(pair<string, string> ("fire","halo saya api"));
+    // percakapan.insert(pair<string, string> ("water","halo saya air"));
+    // percakapan.insert(pair<string, string> ("lightning","halo saya listrik"));
+    // percakapan.insert(pair<string, string> ("ground","halo saya tanah"));
+    // percakapan.insert(pair<string, string> ("ice","halo saya es"));
     cout << percakapan.find(this->species)->second << endl;
 }
 
@@ -68,7 +70,7 @@ void OwnedEngimon::displayDetail(){
     cout << "Element : ";
     for (int i = 0; i< this->nElements; i++){
         cout << i+1 << ". "; 
-        cout << this->skill[i].getSkillName();
+        cout << this->elements[i];
     }
     cout << endl;
     cout << "Level : " << this->level << endl;
@@ -81,45 +83,32 @@ void OwnedEngimon::displayDetail(){
 
 void OwnedEngimon::moveActive(int x, int y){
     if (x!=29){
-        this->position.x = x+1;
-        this->position.y = y;
+        this->position.setX(x+1);
+        this->position.setY(y);
     }
     else if (y!=0){
-        this->position.x = x;
-        this->position.y = y-1;
+        this->position.setX(x);
+        this->position.setY(y-1);
     }
     else{
-        this->position.x = x;
-        this->position.y = y+1;
+        this->position.setX(x);
+        this->position.setY(y+1);
     }
 }
 
-float OwnedEngimon::getStrongestEl(Engimon& enemy) {
-    float strongest = ElementAdvantage::getAdv(this.elements[0], enemy.elements[0]);
 
-    for (int i = 1; i < this.nElements; i++) {
-        for (int j = 1; j < enemy.nElements; j++) {
-            float temp = ElementAdvantage::getAdv(this.elements[i], enemy.elements[j]);
-            if (temp > strongest) {
-                strongest = temp;
-            }
-        }
-    }
-
-    return strongest;
-}
 
 bool OwnedEngimon::fight(Engimon& enemy) {
     float myPower = 0;
-    myPower += getStrongestEl(enemy) * this.level;
-    for (int i = 0; i < this.nSkill; i++) {
-        myPower += this.skill[i].getBasePower() * this.skill[i].getMasteryLevel();
+    myPower += getStrongestEl(enemy) * this->level;
+    for (int i = 0; i < this->nSkill; i++) {
+        myPower += this->skill[i].getBasePower() * this->skill[i].getMasteryLevel();
     }
 
     float enemyPower = 0;
-    enemyPower += enemy.getStrongestEl(*this) * enemy.level;
-    for (int i = 0; i < enemy.nSkill; i++) {
-        enemyPower += enemy.skill[i].getBasePower() * enemy.skill[i].getMasteryLevel();
+    enemyPower += enemy.getStrongestEl(*this) * enemy.getLevel();
+    for (int i = 0; i < enemy.getNSkill(); i++) {
+        enemyPower += enemy.getSkill()[i].getBasePower() * enemy.getSkill()[i].getMasteryLevel();
     }
 
     cout << "My Power : " << myPower << endl;

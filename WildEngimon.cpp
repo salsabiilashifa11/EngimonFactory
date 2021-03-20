@@ -40,15 +40,6 @@ void WildEngimon::setPosition(int x, int y){
         this->x += 1;
         //right
     }
-  /* generate secret number between 1 and 10: */
-  
-    // jika elemennya (..) maka cuma bisa move di sea, ataupun grassland
-    // move secara random
-    // get celltype dari map
-    
-
-    //pake if then elements 
-    // ini mau loop elemennya kah ?
 
 }
 
@@ -67,12 +58,14 @@ bool WildEngimon::validPosition(int x, int y){
         default:
             break;
     
+    Position(this->x,this->y);
     
-    position.gettype()
+    /*position.gettype()
     if (ctype.getType() != Wtype){
         return false;
     } else {
         return true;
-    }
+    }*/
+    
     //ctype.getType().getX();
 }

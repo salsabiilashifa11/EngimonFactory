@@ -5,6 +5,7 @@
 #include <string>
 #include <array>
 #include "Skill.hpp"
+#include "ElementAdvantage.hpp"
 using namespace std;
 
 class Engimon {
@@ -52,10 +53,14 @@ class Engimon {
     string* getElements();
     void addElements(string);
 
+    int getNElements();
+    void setNElements(int);
+
     int getNSkill();
     void setNSkill(int);
 
     bool isMemberSkill(string);
+    float getStrongestEl(Engimon& enemy);
 
     void swap(Skill* a, Skill* b);
     int partition (Skill* arr, int low, int high);

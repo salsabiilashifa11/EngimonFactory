@@ -1,1 +1,1 @@
-g++ -o tesEngimon mainmain.cpp Skill.cpp Engimon.cpp OwnedEngimon.cpp Position.cpp
+g++ -std=c++11 -o tesEngimon mainmain.cpp Skill.cpp Engimon.cpp OwnedEngimon.cpp Position.cpp

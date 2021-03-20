@@ -7,6 +7,7 @@
 #include "Position.hpp"
 #include "Engimon.hpp"
 #include "OwnedEngimon.hpp"
+#include "ElementAdvantage.hpp"
 // #include "Inventory.hpp"
 // #include "SkillItems.hpp"
 

@@ -2,10 +2,11 @@
 
 Engimon::Engimon() {
     name = "XXX";
-    //masih bingung respresentsi kelas dan data nya
     species = "none";
     skill = new Skill[4];
+    nSkill = 0;
     elements = new string[5];
+    nElements = 0;
     level = 0;
     experience = 0;
     cumulativeExperience = 1000;  //kalau mencapai 0, mati
@@ -49,7 +50,7 @@ void Engimon::setName(string name) {
 // }
 // void Engimon::setParentName(string parentName1, string parentName2) {
 //     this->parentName[0] = parentName1;
-//     this->parentName[1] = parentName2;
+//     this->parentName[1] = parentName2; 
 // }
 
 string Engimon::getSpecies(){
@@ -81,8 +82,8 @@ void Engimon::setCumulativeExperience(int cumulativeXP) {
 }
 
 void Engimon::addSkill(const Skill& s){
-    this->nSkill +=1;
     this->skill[nSkill] = s;
+    this->nSkill +=1;
 
     quickSort(this->skill, 0, (this->nSkill)-1);
 }
@@ -91,8 +92,8 @@ Skill* Engimon::getSkill(){
 }
 
 void Engimon::addElements(string element){
-    this->nElements +=1;  
     this->elements[this->nElements] = element;
+    this->nElements +=1;  
 }
 
 string* Engimon::getElements(){
@@ -160,4 +161,27 @@ void Engimon::quickSort(Skill* arr, int low, int high)
         quickSort(arr, low, pi - 1);
         quickSort(arr, pi + 1, high);
     }
+}
+
+int Engimon::getNElements(){
+    return this->nElements;
+}
+
+void Engimon::setNElements(int n){
+    this->nElements = n;
+}
+
+float Engimon::getStrongestEl(Engimon& enemy) {
+    float strongest = ElementAdvantage::getAdv(this->getElements()[0], enemy.getElements()[0]);
+
+    for (int i = 1; i < this->getNElements(); i++) {
+        for (int j = 1; j < enemy.getNElements(); j++) {
+            float temp = ElementAdvantage::getAdv(this->getElements()[i], enemy.getElements()[j]);
+            if (temp > strongest) {
+                strongest = temp;
+            }
+        }
+    }
+
+    return strongest;
 }

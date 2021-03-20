@@ -6,7 +6,6 @@
 #include <map>
 #include "Position.hpp"
 #include "Engimon.hpp"
-#include "ElementAdvantage.hpp"
 
 // == ACTIVE ENGIMON
 class OwnedEngimon : public Engimon {
@@ -15,8 +14,8 @@ class OwnedEngimon : public Engimon {
     string status;
     Position position;
     //mapping species dengan message unik pake stl
-    // static map<int, string> percakapan;
-    float getStrongestEl(string enemyEl);
+    static map<string, string> percakapan;
+    
     
 
    public:
@@ -39,6 +38,7 @@ class OwnedEngimon : public Engimon {
     void displayDetail();
 
     bool fight(Engimon& enemy);
+    
 };
 
 #endif
