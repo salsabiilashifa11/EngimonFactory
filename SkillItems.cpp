@@ -1,6 +1,5 @@
 #include <iostream>
 #include "SkillItems.hpp"
-#include "Skill.hpp"
 using namespace std;
 
 SkillItems::SkillItems(){

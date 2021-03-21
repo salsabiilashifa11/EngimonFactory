@@ -1,1 +1,1 @@
-g++ -o main main.cpp Map.cpp Cell.cpp Player.cpp Position.cpp
+g++ -std=c++11 -o main main.cpp Map.cpp Cell.cpp Player.cpp Position.cpp Engimon.cpp OwnedEngimon.cpp SkillItems.cpp Skill.cpp

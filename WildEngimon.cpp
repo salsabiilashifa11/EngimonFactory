@@ -1,8 +1,16 @@
 #include "WildEngimon.hpp"
 
+int WildEngimon::element2int(string element) {
+    if (element == "Fire" || element == "Ground" || element == "Electric") {
+        return 1;
+    } else {
+        return 2;
+    }
+}
+
 WildEngimon::WildEngimon() : Engimon() {
     this->status = "wild";
-    this->position = //random;
+    // this->position = //random;
 }
 WildEngimon::~WildEngimon(){
     //destruct
@@ -16,11 +24,11 @@ void WildEngimon::setStatus(string newstat){
     this->status = newstat;
 }
 
-Cell WildEngimon::getPosition(){
+Position WildEngimon::getPosition(){
     return this->position;
 }
 
-void WildEngimon::setPosition(int x, int y){
+void WildEngimon::setPosition(int x, int y, Map m){
     //get elemen
     //, CellType Wtype
     int number;
@@ -28,37 +36,47 @@ void WildEngimon::setPosition(int x, int y){
     number = rand() % 4 + 1;
     
     if (number == 1){
-        this->y += 1;
-        //up
+        if (validPosition(m, x, y+1)){
+            position.setY(y+1);
+        }    
     } else if (number == 2){
-        this->y -= 1;
-        //down
+        if (validPosition(m, x, y-1)){
+            position.setY(y-1);
+        }
     } else if (number == 3){
-        this->x -= 1;
-        //left
+        if (validPosition(m, x-1, y)){
+            position.setX(x-1);
+        }
     } else {
-        this->x += 1;
-        //right
+        if (validPosition(m, x, y+1)){
+            position.setX(y+1);
+        }
     }
 
 }
 
-bool WildEngimon::validPosition(int x, int y){
+bool WildEngimon::validPosition(Map m, int x, int y) {
     CellType Wtype;
-    switch(Engimon.getElements()){
-        case 'Fire';
-        case 'Ground';
-        case 'Electric';
+    switch(element2int(getElements()[0])){
+        case 1:
             Wtype = Grassland;
             break;
-        case 'Water';
-        case 'Ice';
+        case 2:
             Wtype = Sea;
             break;
         default:
             break;
+    }
+    if (x < 0  || x >= 30 || 
+        y < 0 || y >=30 || 
+        WType != m[x][y].getType()) {
+            throw "Posisi tidak valid";
+        } 
+    return true;
+
+
     
-    Position(this->x,this->y);
+    // Position(this->x,this->y);
     
     /*position.gettype()
     if (ctype.getType() != Wtype){

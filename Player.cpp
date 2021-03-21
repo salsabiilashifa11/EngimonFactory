@@ -35,8 +35,8 @@ void Player::Move(char _direction){
         setPosition(temp.getX(), temp.getY()-1);
     } else if (_direction == 's' and validMove(_direction)) {
         setPosition(temp.getX()+1, temp.getY());
-    } else if (_direction == 'd'and validMove(_direction)) {
-        setPosition(temp.getX(), temp.getX()+1);
+    } else if (_direction == 'd' and validMove(_direction)) {
+        setPosition(temp.getX(), temp.getY()+1);
     } else {
         throw ("Nabrak broo");
     }
@@ -51,7 +51,7 @@ bool Player::validMove(char _direction) {
     } else if (_direction == 's') {
         return temp.getX()+1 < 30; //Harus dibikin jadi variabel nanti
     } else if (_direction == 'd') {
-        return temp.getX()+1 < 30;
+        return temp.getY()+1 < 30;
     } else {
         throw _direction;
     }
@@ -74,20 +74,39 @@ OwnedEngimon Player::Breed(Engimon& father, Engimon& mother){
         child.setName(name);
         // Parent Name
         child.setParentName(father.getName(), mother.getName());
-        // Species
-        int random = rand() % 1;
-        if (random == 1){
-            child.setSpecies(father.getSpecies());
-        } else {
-            child.setSpecies(mother.getSpecies());
-        }
         child.setNSkill(0);
-        // Inherit skill
+        
         
         // int nSkill
         // udah diset sama addElement
         // Elements
-        
+        float fatherAdvantage = ElementAdvantage::getAdv(father.getElements()[0], mother.getElements()[0]);
+        float motherAdvantage = ElementAdvantage::getAdv(mother.getElements()[0], father.getElements()[0]);
+        if (father.getElements()[0] == mother.getElements()[0]){
+            child.addElements(father.getElements()[0]);
+            child.setSpecies(father.getSpecies());
+            
+        } else if (fatherAdvantage > motherAdvantage) {
+            child.addElements(father.getElements()[0]);
+            child.setSpecies(father.getSpecies());
+            
+        } else if (fatherAdvantage < motherAdvantage) {
+            child.addElements(mother.getElements()[0]);
+            child.setSpecies(mother.getSpecies());
+        } else {
+            child.addElements(mother.getElements()[0]);
+            child.addElements(father.getElements()[0]);
+            child.setSpecies(mother.getSpecies()); //Masih salah
+        }
+        // Inherit Skill
+        // int i = 0;
+        // int j = 0;
+        // while (child.getNSkill() <= 4 and (i < father.getNSkill() or j < mother.getNSkill())){
+        //     if (father.getSkill()[i].getMasteryLevel() > mother.getSkill()[j].getMasteryLevel()){
+                
+        //         child.addSkill(father.getSkill()[i].getSkillName())
+        //     }
+        // }
         // Level 
         child.setLevel(0);
         // Experience
@@ -98,8 +117,9 @@ OwnedEngimon Player::Breed(Engimon& father, Engimon& mother){
         father.setLevel(fatherLevelBefore-30);
         mother.setLevel(motherLevelBefore-30);
         return child;
-    } else {
-        // throw message 
+    } 
+    else {
+        throw ("Gabisa breed. Butuh Nurdin brou");
     }
 }
 
@@ -153,14 +173,14 @@ void Player::setActiveIndex(int i) {
 
 // void Player::addToInventory(OwnedEngimon el) {
 //     if (playerEngimons.n_elmt() + playerItems.n_elmt() > MAX_EL) {
-//         throw "Inventory at max capacity";
+//         throw "Inventory penuh";
 //     }
 //     playerEngimons.append(el);
 // }
 
 // void Player::addToInventory(SkillItems el) {
 //     if (playerEngimons.n_elmt() + playerItems.n_elmt() > MAX_EL) {
-//         throw "Inventory at max capacity";
+//         throw "Inventory penuh";
 //     }
 //     playerItems.append(el);
 // }

@@ -7,64 +7,66 @@
 #include "Skill.hpp"
 #include "ElementAdvantage.hpp"
 using namespace std;
+// namespace EngimonFactory {
+    class Engimon {
+    protected:
+        string name;
+        string species;
+        Skill* skill;
+        int nSkill;
+        string* elements;
+        int nElements;
+        int level;
+        int experience;
+        int cumulativeExperience;
+        //mapping species dengan skill unik pake stl
 
-class Engimon {
-   protected:
-    string name;
-    string species;
-    Skill* skill;
-    int nSkill;
-    string* elements;
-    int nElements;
-    int level;
-    int experience;
-    int cumulativeExperience;
-    //mapping species dengan skill unik pake stl
+    public:
+        Engimon();
+        // Engimon(string name, const Engimon mother, const Engimon father);
+        virtual ~Engimon();
+        void levelUp();
+        void increaseXP(int);
+        //void interact();
 
-   public:
-    Engimon();
-    // Engimon(string name, const Engimon mother, const Engimon father);
-    virtual ~Engimon();
-    void levelUp();
-    void increaseXP(int);
-    //void interact();
+        virtual void displayDetail() = 0;  //berisi semua informasi atribut engimon
 
-    virtual void displayDetail() = 0;  //berisi semua informasi atribut engimon
+        //Getter and setter
+        string getName();
+        void setName(string);
 
-    //Getter and setter
-    string getName();
-    void setName(string);
+        string getSpecies();
+        void setSpecies(string);
 
-    string getSpecies();
-    void setSpecies(string);
+        int getLevel();
+        void setLevel(int);
 
-    int getLevel();
-    void setLevel(int);
+        int getExperience();
+        void setExperience(int);
 
-    int getExperience();
-    void setExperience(int);
+        int getCumulativeExperience();
+        void setCumulativeExperience(int);
 
-    int getCumulativeExperience();
-    void setCumulativeExperience(int);
+        void addSkill(const Skill&);
+        Skill* getSkill();
 
-    void addSkill(const Skill&);
-    Skill* getSkill();
+        string* getElements();
+        void addElements(string);
 
-    string* getElements();
-    void addElements(string);
+        int getNElements();
+        void setNElements(int);
 
-    int getNElements();
-    void setNElements(int);
+        int getNSkill();
+        void setNSkill(int);
 
-    int getNSkill();
-    void setNSkill(int);
+        bool isMemberSkill(string);
+        float getStrongestEl(Engimon& enemy);
 
-    bool isMemberSkill(string);
-    float getStrongestEl(Engimon& enemy);
+        void swap(Skill* a, Skill* b);
+        int partition (Skill* arr, int low, int high);
+        void quickSort(Skill* arr, int low, int high);
+    };
+// }
 
-    void swap(Skill* a, Skill* b);
-    int partition (Skill* arr, int low, int high);
-    void quickSort(Skill* arr, int low, int high);
-};
 
 #endif

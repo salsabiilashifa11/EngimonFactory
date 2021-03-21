@@ -1,47 +1,51 @@
 #include "Position.hpp"
 
-Position::Position() {
-    x = -1;
-    y = -1;
-}
+// namespace Position{
 
-Position::Position(int _x, int _y) {
-    x = _x;
-    y = _y;
-}
+    Position::Position() {
+        x = -1;
+        y = -1;
+    }
 
-Position::~Position() {
-    //do nothing
-}
+    Position::Position(int _x, int _y) {
+        x = _x;
+        y = _y;
+    }
 
-// Operator Overloading
-Position& Position::operator=(const Position& other){
-    x = other.x;
-    y = other.y;
+    Position::~Position() {
+        //do nothing
+    }
 
-    return *this;
-}
+    // Operator Overloading
+    Position& Position::operator=(const Position& other){
+        x = other.x;
+        y = other.y;
 
-//Getter
-int Position::getX() {
-    return x;
-}
+        return *this;
+    }
 
-int Position::getY() {
-    return y;
-}
+    //Getter
+    int Position::getX() {
+        return x;
+    }
 
-//Setter
-void Position::setX(int _x) {
-    x = _x;
-}
+    int Position::getY() {
+        return y;
+    }
 
-void Position::setY(int _y) {
-    y = _y;
-}
+    //Setter
+    void Position::setX(int _x) {
+        x = _x;
+    }
 
-//Methods
-void Position::print() {
-    cout << "X: " << x << endl;
-    cout << "Y: " << y << endl;
-}
+    void Position::setY(int _y) {
+        y = _y;
+    }
+
+    //Methods
+    void Position::print() {
+        cout << "X: " << x << endl;
+        cout << "Y: " << y << endl;
+    }
+
+// }

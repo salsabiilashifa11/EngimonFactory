@@ -1,6 +1,7 @@
 #include "OwnedEngimon.hpp"
 
-map<string, string> OwnedEngimon::percakapan = {{"fire","halo saya api"}, {"water","halo saya air"}, {"lightning","halo saya listrik"}, {"ground","halo saya tanah"}, {"ice","halo saya es"}};
+
+map<string, string> OwnedEngimon::percakapan = {{"fire","halo saya api"}, {"water","halo saya air"}, {"kadal","halo saya listrik"}, {"ground","halo saya tanah"}, {"ice","halo saya es"}};
 
 OwnedEngimon::OwnedEngimon() : Engimon() {
     this->status = "owned";
@@ -116,3 +117,5 @@ bool OwnedEngimon::fight(Engimon& enemy) {
 
     return myPower > enemyPower;
 }
+
+

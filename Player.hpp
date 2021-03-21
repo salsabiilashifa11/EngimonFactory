@@ -4,15 +4,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <iostream>
+
+
 #include "Position.hpp"
-#include "Engimon.hpp"
 #include "OwnedEngimon.hpp"
 #include "ElementAdvantage.hpp"
 // #include "Inventory.hpp"
 // #include "SkillItems.hpp"
 
 using namespace std;
-
 class Player {
     private :
         string name;

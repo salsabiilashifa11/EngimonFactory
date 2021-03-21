@@ -2,13 +2,18 @@
 #define _WILD_ENGIMON_HPP_
 
 #include <string>
+#include <iostream>
 #include "Cell.hpp"
 #include "Engimon.hpp"
-
+#include "Map.hpp"
+using namespace std;
+// using namespace EngimonFactory;
 class WildEngimon : public Engimon {
    private:
     string status;
-    Cell position;
+    Position position;
+    int element2int(string element);
+
    public:
     WildEngimon();
     ~WildEngimon();
@@ -16,16 +21,12 @@ class WildEngimon : public Engimon {
     string getStatus();
     void setStatus(string);
 
-    Cell getPosition();
+    Position getPosition();
     void setPosition(int, int);
 
+    bool validPosition(Map m, int x, int y);
 };
 
-WildEngimon::WildEngimon(/* args */) {
-}
-
-WildEngimon::~WildEngimon() {
-}
 
 #endif
     

@@ -2,7 +2,7 @@
 #define _SKILLITEMS_HPP_
 #include "Skill.hpp"
 #include <iostream>
-
+//using namespace Skill;
 class SkillItems{
     private:
         Skill item_skill;

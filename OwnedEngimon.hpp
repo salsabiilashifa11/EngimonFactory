@@ -6,39 +6,46 @@
 #include <map>
 #include "Position.hpp"
 #include "Engimon.hpp"
+// using namespace EngimonUtil;
+//using namespace Position;
+//using namespace std;
 
 // == ACTIVE ENGIMON
-class OwnedEngimon : public Engimon {
-   private:
-    string *parentName;
-    string status;
-    Position position;
-    //mapping species dengan message unik pake stl
-    static map<string, string> percakapan;
-    
-    
 
-   public:
-    OwnedEngimon();
-    OwnedEngimon(string name, string species);
-    ~OwnedEngimon();
+// namespace OwnedEngimon{
+    class OwnedEngimon : public Engimon {
+    private:
+        string *parentName;
+        string status;
+        Position position;
+        //mapping species dengan message unik pake stl
+        static map<string, string> percakapan;
+        
+        
 
-    string* getParentName();
-    void setParentName(string,string);
+    public:
+        OwnedEngimon();
+        OwnedEngimon(string name, string species);
+        ~OwnedEngimon();
 
-    string getStatus();
-    void setStatus(string);
+        string* getParentName();
+        void setParentName(string,string);
 
-    Position getPosition();
-    void setPosition(int, int);
+        string getStatus();
+        void setStatus(string);
 
-    void interact();
-    void moveActive(int x, int y);
+        Position getPosition();
+        void setPosition(int, int);
 
-    void displayDetail();
+        void interact();
+        void moveActive(int x, int y);
 
-    bool fight(Engimon& enemy);
-    
-};
+        void displayDetail();
+
+        bool fight(Engimon& enemy);
+        
+    };
+// }
+
 
 #endif
