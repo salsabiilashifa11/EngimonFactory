@@ -9,19 +9,19 @@
 #include "Position.hpp"
 #include "OwnedEngimon.hpp"
 #include "ElementAdvantage.hpp"
-// #include "Inventory.hpp"
+#include "Inventory.hpp"
 // #include "SkillItems.hpp"
 
+#define MAX_EL 15
 using namespace std;
 class Player {
     private :
         string name;
         Position playerPos;
         OwnedEngimon active;
-        // Inventory playerInventory;
         int activeIndex;
-        // Inventory<OwnedEngimon> playerEngimons;
-        // Inventory<SkillItems> playerItems;
+        Inventory<OwnedEngimon> playerEngimons;
+        Inventory<SkillItems> playerItems;
 
     public :
         Player();
@@ -35,7 +35,7 @@ class Player {
         void Move(char _direction);
         bool validMove(char _direction);
         // void changeEngimon();
-        OwnedEngimon Breed(Engimon& father, Engimon& mother);
+        void Breed(Engimon& father, Engimon& mother);
         // void checkEngimon();
         // void useItem(SkillItems);
 
@@ -53,8 +53,9 @@ class Player {
         void setPosition(int _x, int _y);
         void setActiveIndex(int i);
 
-        // void addToInventory(OwnedEngimon el);
-        // void addToInventory(SkillItems el);
+        void addToInventory(OwnedEngimon el);
+        void addToInventory(SkillItems el);
+        void showInventory();
 };
 
 #endif

@@ -23,6 +23,8 @@ using namespace std;
 
     public:
         Engimon();
+        Engimon(const Engimon& e);
+        Engimon& operator=(const Engimon& e);
         // Engimon(string name, const Engimon mother, const Engimon father);
         virtual ~Engimon();
         void levelUp();

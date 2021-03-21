@@ -26,6 +26,8 @@
     public:
         OwnedEngimon();
         OwnedEngimon(string name, string species);
+        OwnedEngimon(const OwnedEngimon& oe);
+        OwnedEngimon& operator=(const OwnedEngimon& oe);
         ~OwnedEngimon();
 
         string* getParentName();

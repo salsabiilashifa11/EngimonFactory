@@ -3,15 +3,19 @@
 Player::Player(){
     name = "";
     setPosition(0,0);
-    // Engimon active;
-    // Inventory playerInventory;
+    OwnedEngimon temp("pikachu","kadal");
+    active = temp;
+    Inventory<OwnedEngimon> playerEngimons;
+    Inventory<SkillItems> playerItems;
     activeIndex = -1;
 }
 Player::Player(string _name){
     this->name = _name;
     setPosition(0,0);
-    // Engimon active;
-    // Inventory playerInventory;
+    OwnedEngimon temp("pikachu","kadal");
+    active = temp;
+    Inventory<OwnedEngimon> playerEngimons;
+    Inventory<SkillItems> playerItems;
     activeIndex = -1;
 }
 
@@ -61,7 +65,7 @@ bool Player::validMove(char _direction) {
 
 // }
 
-OwnedEngimon Player::Breed(Engimon& father, Engimon& mother){
+void Player::Breed(Engimon& father, Engimon& mother){
     
     if (father.getLevel() >= 30 and mother.getLevel() >= 30){
         OwnedEngimon child;
@@ -96,7 +100,7 @@ OwnedEngimon Player::Breed(Engimon& father, Engimon& mother){
         } else {
             child.addElements(mother.getElements()[0]);
             child.addElements(father.getElements()[0]);
-            child.setSpecies(mother.getSpecies()); //Masih salah
+            child.setSpecies("KADAL"); //Masih salah
         }
         // Inherit Skill
         // int i = 0;
@@ -116,7 +120,8 @@ OwnedEngimon Player::Breed(Engimon& father, Engimon& mother){
         // reduce the level of parent
         father.setLevel(fatherLevelBefore-30);
         mother.setLevel(motherLevelBefore-30);
-        return child;
+        child.displayDetail();
+        playerEngimons.append(child);
     } 
     else {
         throw ("Gabisa breed. Butuh Nurdin brou");
@@ -136,6 +141,7 @@ OwnedEngimon Player::Breed(Engimon& father, Engimon& mother){
 // void Player::displayEngimon(){
 
 // }
+
 // void Player::displaySkillItem(){
 
 // }
@@ -171,16 +177,23 @@ void Player::setActiveIndex(int i) {
     activeIndex = i;
 }
 
-// void Player::addToInventory(OwnedEngimon el) {
-//     if (playerEngimons.n_elmt() + playerItems.n_elmt() > MAX_EL) {
-//         throw "Inventory penuh";
-//     }
-//     playerEngimons.append(el);
-// }
+void Player::addToInventory(OwnedEngimon el) {
+    if (playerEngimons.n_elmt() + playerItems.n_elmt() > MAX_EL) {
+        throw "Inventory penuh";
+    }
+    playerEngimons.append(el);
+}
 
-// void Player::addToInventory(SkillItems el) {
-//     if (playerEngimons.n_elmt() + playerItems.n_elmt() > MAX_EL) {
-//         throw "Inventory penuh";
-//     }
-//     playerItems.append(el);
-// }
+void Player::addToInventory(SkillItems el) {
+    if (playerEngimons.n_elmt() + playerItems.n_elmt() > MAX_EL) {
+        throw "Inventory penuh";
+    }
+    playerItems.append(el);
+}
+
+void Player::showInventory() {
+    cout << "Engimon: " << endl;
+    playerEngimons.displayAll();
+    cout << "Skill items: " << endl;
+    playerItems.displayAll();
+}

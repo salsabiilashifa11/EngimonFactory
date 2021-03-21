@@ -18,6 +18,49 @@
     //     this->parentName[1] = father.name;
     // }
 
+Engimon::Engimon(const Engimon& e) {
+    name = e.name;
+    species = e.species;
+    skill = new Skill[4];
+    elements = new string[5];
+    level = e.level;
+    experience = e.experience;
+    cumulativeExperience = e.cumulativeExperience;
+
+    for (int i = 0; i < e.nSkill; i++) {
+        skill[i] = e.skill[i];
+    }
+    nSkill = e.nSkill;
+    for (int i = 0; i < e.nElements; i++) {
+        elements[i] = e.elements[i];
+    }
+    nElements = e.nElements;
+}
+
+Engimon& Engimon::operator=(const Engimon& e) {
+    delete[] skill;
+    delete[] elements;
+
+    name = e.name;
+    species = e.species;
+    skill = new Skill[4];
+    elements = new string[5];
+    level = e.level;
+    experience = e.experience;
+    cumulativeExperience = e.cumulativeExperience;
+
+    for (int i = 0; i < e.nSkill; i++) {
+        skill[i] = e.skill[i];
+    }
+    nSkill = e.nSkill;
+    for (int i = 0; i < e.nElements; i++) {
+        elements[i] = e.elements[i];
+    }
+    nElements = e.nElements;
+
+    return *this;
+}
+
     Engimon::~Engimon() {
         delete[] skill;
         delete[] elements;

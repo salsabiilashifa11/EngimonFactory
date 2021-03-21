@@ -17,9 +17,39 @@ OwnedEngimon::OwnedEngimon(string name, string species) : Engimon() {
     this->position = Position();
 }
 
+OwnedEngimon::OwnedEngimon(const OwnedEngimon& oe) : Engimon(oe) {
+    this->status = oe.status;
+    this->parentName = new string[2];
+    this->parentName[0] = oe.parentName[0];
+    this->parentName[1] = oe.parentName[1];
+}
+
+OwnedEngimon& OwnedEngimon::operator=(const OwnedEngimon& oe) {
+    Engimon::operator=(oe);
+    delete[] parentName;
+    this->status = oe.status;
+    this->parentName = new string[2];
+    this->parentName[0] = oe.parentName[0];
+    this->parentName[1] = oe.parentName[1];
+
+    
+    return *this;
+}
+
 OwnedEngimon::~OwnedEngimon(){
     delete[] parentName;
 }
+
+// OwnedEngimon& OwnedEngimon::operator=(const OwnedEngimon& other){
+//     delete[] parentName;
+//     this->name = other.name;
+//     this->species = other.species; 
+//     this->status = other.status;
+//     this->parentName = new string[2];
+//     this->parentName[0] = other.getParentName()[0];
+//     this->position = other.position;
+
+// }
 
 string* OwnedEngimon::getParentName(){
     return this->parentName;
