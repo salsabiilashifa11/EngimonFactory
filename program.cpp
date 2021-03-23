@@ -23,6 +23,7 @@ int main() {
     JumlahEngimonGrassland1 = JumlahEngimonAir;
     JumlahEngimonGrassland2 = JumlahEngimon - JumlahEngimonAir - JumlahEngimonGrassland1;
     int j = 0;
+    srand (time(0));
 
     //Inisialisasi Engimon di air
     for (int i = 0; i < JumlahEngimonAir; i++){
@@ -126,10 +127,11 @@ int main() {
                 Engimon[i].Move(&m);
                 // cout << Engimon[i].getName() << endl;
             }
-            cout << "Posisi: " << Engimon[0].getPosition().getX() << endl;
+            cout << "Posisi: " << Engimon[8].getPosition().getX() << endl;
             m.updateMap();
             m.drawMap();
             m.getPlayer().getPosition().print();   
+            cout << JumlahEngimon << endl;
         
         }
     }

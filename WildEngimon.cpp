@@ -4,7 +4,7 @@
 map<string,string> WildEngimon::spesiesSkill = {{"kadal","libasan ekor keadilan"},{"ikan","tembakan gelembung kebebasan"},{"kambing", "serudukan tanduk keputusasaan"}, {"beruang", "cakaran cakar kematian"}, {"kelelawar", "teriakan ultrasonic kemarahan"}};
 
 int WildEngimon::element2int(string element) {
-    if (element == "Fire" || element == "Ground" || element == "Electric") {
+    if (element == "fire" || element == "ground" || element == "electric") {
         return 1;
     } else {
         return 2;
@@ -97,7 +97,6 @@ void WildEngimon::Move(Map* m){
     int x = position.getX();
     int y = position.getY();
     int number;
-    srand (time(NULL));
     number = rand() % 4 + 1;
     Engimon* temp = new WildEngimon();
     
