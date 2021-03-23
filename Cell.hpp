@@ -4,6 +4,8 @@
 #include <stdio.h>
 #include <iostream>
 #include "Player.hpp"
+#include "Engimon.hpp"
+
 using namespace std;
 
 enum CellType {Grassland, Sea};
@@ -13,24 +15,31 @@ class Cell {
         int x; //x coordinate
         int y; //y coordinate
         CellType type; //Grassland or sea
-        //Engimon occupierE
         Player occupierP;
+        Engimon* occupierE;
 
     public:
         Cell();
         Cell(int _x, int _y, CellType _type);
+        Cell(const Cell& c);
+        void operator=(const Cell& c);
 
         //Getter
         int getX();
         int getY();
         CellType getType();
+        Engimon* getOccupierE();
 
         //Setter
         void setPlayer(Player& p);
+        void setEngimon(Engimon* e);
 
         //Method
+        //void drawRandom(int input);
         void drawCell();
+        void drawEngimon(int level_min);
         void printInfo();
+        void setOccupierE();
 
 };
 

@@ -5,17 +5,18 @@ Player::Player(){
     setPosition(0,0);
     OwnedEngimon temp("pikachu","kadal");
     active = temp;
-    Inventory<OwnedEngimon> playerEngimons;
-    Inventory<SkillItems> playerItems;
+    // Inventory<OwnedEngimon> playerEngimons;
+    // Inventory<SkillItems> playerItems;
     activeIndex = -1;
 }
+
 Player::Player(string _name){
     this->name = _name;
     setPosition(0,0);
     OwnedEngimon temp("pikachu","kadal");
     active = temp;
-    Inventory<OwnedEngimon> playerEngimons;
-    Inventory<SkillItems> playerItems;
+    // Inventory<OwnedEngimon> playerEngimons;
+    // Inventory<SkillItems> playerItems;
     activeIndex = -1;
 }
 
@@ -67,7 +68,7 @@ bool Player::validMove(char _direction) {
 
 void Player::Breed(Engimon& father, Engimon& mother){
     
-    if (father.getLevel() >= 30 and mother.getLevel() >= 30){
+    if (father.getLevel() > 30 and mother.getLevel() > 30){
         OwnedEngimon child;
         int fatherLevelBefore = father.getLevel();
         int motherLevelBefore = mother.getLevel();
@@ -103,14 +104,69 @@ void Player::Breed(Engimon& father, Engimon& mother){
             child.setSpecies("KADAL"); //Masih salah
         }
         // Inherit Skill
-        // int i = 0;
-        // int j = 0;
-        // while (child.getNSkill() <= 4 and (i < father.getNSkill() or j < mother.getNSkill())){
-        //     if (father.getSkill()[i].getMasteryLevel() > mother.getSkill()[j].getMasteryLevel()){
-                
-        //         child.addSkill(father.getSkill()[i].getSkillName())
-        //     }
-        // }
+        int i = 0;
+        int j = 0;
+        while (child.getNSkill() <= 4 && (i < father.getNSkill() || j < mother.getNSkill())){
+            if (father.getSkill()[i].getMasteryLevel() >= mother.getSkill()[j].getMasteryLevel()){  // Kalo level abi di currIdx lebih gede dari umi
+                for (int k = 0; k < child.getNElements(); i++){
+                    if (father.isCorrectElement(child.getElements()[0])){  // Kalo elemen skill abi compatible
+                        child.addSkill(father.getSkill()[k]);
+                        if (mother.isMemberSkill(father.getSkill()[i].getSkillName())){ // Kalo umi juga punya skill yang sama
+                            int skillIdx = mother.findSkillIndex(father.getSkill()[i].getSkillName());
+                            if (father.getSkill()[i].getMasteryLevel() == mother.getSkill()[skillIdx].getMasteryLevel()){   // Kalo levelnya sama
+                                child.getSkill()[child.getNSkill()-1].setMasteryLevel(father.getSkill()[i].getMasteryLevel()+1);
+                            } else {    // Kalo levelnya beda
+                                child.getSkill()[child.getNSkill()-1].setMasteryLevel(max(father.getSkill()[i].getMasteryLevel(), mother.getSkill()[skillIdx].getMasteryLevel()));
+                            }
+                            
+                        }
+                    i++;
+                    } else if (mother.isCorrectElement(child.getElements()[k])){   // Kalo elemen skill umi compatible
+                        child.addSkill(mother.getSkill()[j]);
+                        if (father.isMemberSkill(mother.getSkill()[j].getSkillName())){ // Kalo abi punya skill yang sama
+                            int skillIdx = father.findSkillIndex(mother.getSkill()[j].getSkillName());
+                            if (mother.getSkill()[j].getMasteryLevel() == mother.getSkill()[skillIdx].getMasteryLevel()){   // Kalo levelnya sama
+                                child.getSkill()[child.getNSkill()-1].setMasteryLevel(mother.getSkill()[j].getMasteryLevel()+1);
+                            } else {    // Kalo levelnya beda
+                                child.getSkill()[child.getNSkill()-1].setMasteryLevel(max(mother.getSkill()[j].getMasteryLevel(), father.getSkill()[skillIdx].getMasteryLevel()));
+                            }
+                            
+                        }
+                        j++;
+                    }
+                    break;
+                }
+            } else {
+                for (int k = 0; k < child.getNElements(); i++){
+                    if (mother.isCorrectElement(child.getElements()[k])){   // Kalo elemen skill umi compatible
+                        child.addSkill(mother.getSkill()[j]);
+                        if (father.isMemberSkill(mother.getSkill()[j].getSkillName())){ // Kalo abi punya skill yang sama
+                            int skillIdx = father.findSkillIndex(mother.getSkill()[j].getSkillName());
+                            if (mother.getSkill()[j].getMasteryLevel() == mother.getSkill()[skillIdx].getMasteryLevel()){   // Kalo levelnya sama
+                                child.getSkill()[child.getNSkill()-1].setMasteryLevel(mother.getSkill()[j].getMasteryLevel()+1);
+                            } else {    // Kalo levelnya beda
+                                child.getSkill()[child.getNSkill()-1].setMasteryLevel(max(mother.getSkill()[j].getMasteryLevel(), father.getSkill()[skillIdx].getMasteryLevel()));
+                            }   
+                        }
+                        j++;
+                    } else if (father.isCorrectElement(child.getElements()[0])){  // Kalo elemen skill abi compatible
+                        child.addSkill(father.getSkill()[k]);
+                        if (mother.isMemberSkill(father.getSkill()[i].getSkillName())){ // Kalo umi juga punya skill yang sama
+                            int skillIdx = mother.findSkillIndex(father.getSkill()[i].getSkillName());
+                            if (father.getSkill()[i].getMasteryLevel() == mother.getSkill()[skillIdx].getMasteryLevel()){   // Kalo levelnya sama
+                                child.getSkill()[child.getNSkill()-1].setMasteryLevel(father.getSkill()[i].getMasteryLevel()+1);
+                            } else {    // Kalo levelnya beda
+                                child.getSkill()[child.getNSkill()-1].setMasteryLevel(max(father.getSkill()[i].getMasteryLevel(), mother.getSkill()[skillIdx].getMasteryLevel()));
+                            }
+                            
+                        }
+                        i++;
+                    }
+                    break;
+                }
+
+            }
+        }
         // Level 
         child.setLevel(0);
         // Experience
@@ -122,8 +178,7 @@ void Player::Breed(Engimon& father, Engimon& mother){
         mother.setLevel(motherLevelBefore-30);
         child.displayDetail();
         playerEngimons.append(child);
-    } 
-    else {
+    } else {
         throw ("Gabisa breed. Butuh Nurdin brou");
     }
 }

@@ -41,7 +41,7 @@
     }
 
     //Getter
-    Cell Map::getCell(int x, int y) {
+    Cell& Map::getCell(int x, int y) {
         return map[x][y];
     }
 
@@ -59,6 +59,16 @@
             cout << endl;
         }
     }
+/*
+    void Map::spawn(int input){
+        for (int i = 0; i < MAP_HEIGHT; i++) {
+            for (int j = 0; j < MAP_WIDTH; j++) {
+                map[i][j].drawRandom(input);
+                cout << " ";
+            }
+            cout << endl;
+        }
+    } */
 
 
     CellType Map::getType(char c) {
@@ -100,6 +110,8 @@
         }
         map[player.getPosition().getX()][player.getPosition().getY()].setPlayer(player);
     }
+
+
 // }
 
 

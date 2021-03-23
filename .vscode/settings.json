@@ -53,6 +53,14 @@
     "map": "cpp",
     "__tree": "cpp",
     "ios": "cpp",
-    "__functional_base": "cpp"
+    "__functional_base": "cpp",
+    "__bit_reference": "cpp",
+    "__functional_03": "cpp",
+    "__hash_table": "cpp",
+    "__mutex_base": "cpp",
+    "__node_handle": "cpp",
+    "__tuple": "cpp",
+    "fstream": "cpp",
+    "stack": "cpp"
   }
 }

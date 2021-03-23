@@ -62,6 +62,8 @@ using namespace std;
         void setNSkill(int);
 
         bool isMemberSkill(string);
+        bool isCorrectElement(string);
+        int findSkillIndex(string);
         float getStrongestEl(Engimon& enemy);
 
         void swap(Skill* a, Skill* b);

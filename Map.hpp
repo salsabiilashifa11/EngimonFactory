@@ -26,17 +26,17 @@ using namespace std;
         ~Map();
 
         //Getter
-        Cell getCell(int x, int y);
+        Cell& getCell(int x, int y);
         Player& getPlayer();
 
         //Methods
         void drawMap();
         CellType getType(char c);
         void updateMap();
+        //void spawn(int input);
         // Engimon getOccupierE(char c);
         // void saveMap();
         
-
     };
 // }
 

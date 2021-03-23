@@ -3,9 +3,11 @@
 
 #include <string>
 #include <iostream>
-#include "Cell.hpp"
+#include <map>
 #include "Engimon.hpp"
+#include "Skill.hpp"
 #include "Map.hpp"
+
 using namespace std;
 // using namespace EngimonFactory;
 class WildEngimon : public Engimon {
@@ -13,18 +15,23 @@ class WildEngimon : public Engimon {
     string status;
     Position position;
     int element2int(string element);
+    static map<string, string> spesiesSkill;
 
    public:
     WildEngimon();
+    WildEngimon(string species, string element, int level, int x, int y, Map* m);
     ~WildEngimon();
+    void operator=(const WildEngimon&);
 
     string getStatus();
     void setStatus(string);
 
     Position getPosition();
-    void setPosition(int, int);
+    void setPosition(int, int, Map* m);
+    void Move(Map* m);
 
-    bool validPosition(Map m, int x, int y);
+    bool validPosition(Map* m, int x, int y);
+    void displayDetail();
 };
 
 

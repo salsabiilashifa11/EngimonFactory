@@ -1,7 +1,7 @@
 #include "OwnedEngimon.hpp"
 
 
-map<string, string> OwnedEngimon::percakapan = {{"fire","halo saya api"}, {"water","halo saya air"}, {"kadal","halo saya listrik"}, {"ground","halo saya tanah"}, {"ice","halo saya es"}};
+map<string, string> OwnedEngimon::percakapan = {{"ikan","halo saya api"}, {"kambing","halo saya air"}, {"beruang","halo saya listrik"}, {"kelelawar","halo saya tanah"}, {"kadal","halo saya es"}};
 
 OwnedEngimon::OwnedEngimon() : Engimon() {
     this->status = "owned";
