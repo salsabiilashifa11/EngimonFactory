@@ -109,6 +109,8 @@
             }
         }
         map[player.getPosition().getX()][player.getPosition().getY()].setPlayer(player);
+        map[player.getActiveEngimon().getPosition().getX()][player.getActiveEngimon().getPosition().getY()]
+            .setEngimon(&player.getActiveEngimon());
     }
 
 

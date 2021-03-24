@@ -41,12 +41,12 @@ int main() {
         posisiX = (rand() % 10);
         posisiY = (rand() % 20);
         lvl = (rand() % 69);
-        element = (rand() % 4);
+        element = (rand() % 4 + 1);
         switch (element){
-            case 0:
-                Engimon[j] = WildEngimon("kadal", "ice", lvl, posisiX, posisiY, &m);
-                m.getCell(posisiX, posisiY).setEngimon(&Engimon[j]);
-                break;
+            // case 0:
+            //     Engimon[j] = WildEngimon("kadal", "ice", lvl, posisiX, posisiY, &m);
+            //     m.getCell(posisiX, posisiY).setEngimon(&Engimon[j]);
+            //     break;
             case 1:
                 Engimon[j] = WildEngimon("ikan", "fire", lvl, posisiX, posisiY, &m);
                 m.getCell(posisiX, posisiY).setEngimon(&Engimon[j]);
@@ -70,12 +70,12 @@ int main() {
         posisiX = (rand() % 20) +10;
         posisiY = (rand() % 30);
         lvl = (rand() % 69);
-        element = (rand() % 4);
+        element = (rand() % 4 + 1);
         switch (element){
-            case 0:
-                Engimon[j] = WildEngimon("kadal", "ice", lvl, posisiX, posisiY, &m);
-                m.getCell(posisiX, posisiY).setEngimon(&Engimon[j]);
-                break;
+            // case 0:
+            //     Engimon[j] = WildEngimon("kadal", "ice", lvl, posisiX, posisiY, &m);
+            //     m.getCell(posisiX, posisiY).setEngimon(&Engimon[j]);
+            //     break;
             case 1:
                 Engimon[j] = WildEngimon("ikan", "fire", lvl, posisiX, posisiY, &m);
                 m.getCell(posisiX, posisiY).setEngimon(&Engimon[j]);

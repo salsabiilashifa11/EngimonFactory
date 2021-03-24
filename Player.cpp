@@ -5,9 +5,8 @@ Player::Player(){
     setPosition(0,0);
     OwnedEngimon temp("pikachu","kadal");
     active = temp;
-    // Inventory<OwnedEngimon> playerEngimons;
-    // Inventory<SkillItems> playerItems;
     activeIndex = -1;
+    active.setPosition(0,1);
 }
 
 Player::Player(string _name){
@@ -15,9 +14,8 @@ Player::Player(string _name){
     setPosition(0,0);
     OwnedEngimon temp("pikachu","kadal");
     active = temp;
-    // Inventory<OwnedEngimon> playerEngimons;
-    // Inventory<SkillItems> playerItems;
-    activeIndex = -1;
+    activeIndex = 0;
+    active.setPosition(0,1);
 }
 
 // default constructor for player
@@ -206,7 +204,7 @@ void Player::Breed(Engimon& father, Engimon& mother){
 // }
 
 // Getter Setter
-OwnedEngimon Player::getActiveEngimon(){
+OwnedEngimon& Player::getActiveEngimon(){
     return active;
 }
 string Player::getName() {
@@ -230,6 +228,7 @@ void Player::setPosition(int _x, int _y) {
 
 void Player::setActiveIndex(int i) {
     activeIndex = i;
+    active = playerEngimons[activeIndex];
 }
 
 void Player::addToInventory(OwnedEngimon el) {

@@ -62,7 +62,7 @@ void Cell::setEngimon(Engimon* e) {
 
 //Method
 void Cell::drawCell() {
-    //Check for playe occupiers
+    //Check for player and engimon occupiers
     if (occupierP.getName() == "" && occupierE->getName() == "XXX") {
         if (type == Sea) {
             cout << "o";

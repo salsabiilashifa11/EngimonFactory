@@ -45,7 +45,7 @@ class Player {
         // void detailEngimon();
 
         // Getter Setter
-        OwnedEngimon getActiveEngimon();
+        OwnedEngimon& getActiveEngimon();
         string getName();
         int getActiveIndex();
         Position getPosition() const;

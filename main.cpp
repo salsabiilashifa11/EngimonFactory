@@ -43,6 +43,11 @@ int main() {
         charizard.displayDetail();
         pikachu.displayDetail();
 
+        cout << "DEBUG SHIFA" << endl;
+        p.addToInventory(pikachu);
+        p.setActiveIndex(0);
+        p.getActiveEngimon().displayDetail();
+
         //WildEngimon Spawning DEBUGGGG
         WildEngimon wildengimon("kambing", "water", 20, 9, 28, &m);
         // wildengimon.setPosition(5, 28, &m);
