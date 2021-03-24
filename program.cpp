@@ -31,7 +31,7 @@ int main() {
         // 0<x=10 20<y<=30
         posisiX = (rand() % 10);
         posisiY = (rand() % 10) + 20;
-        lvl = (rand() % 69);
+        lvl = (rand() % 2);
         element = (rand() % 2);
         switch (element){
             case 0:
@@ -50,7 +50,7 @@ int main() {
     for (int i = 0; i < JumlahEngimonGrassland1; i++){
         posisiX = (rand() % 9) + 1;
         posisiY = (rand() % 20);
-        lvl = (rand() % 69);
+        lvl = (rand() % 2);
         element = (rand() % 3);
         switch (element){
             case 0:
@@ -75,7 +75,7 @@ int main() {
     for (int i = 0; i < JumlahEngimonGrassland2; i++){
         posisiX = (rand() % 20) +10;
         posisiY = (rand() % 30);
-        lvl = (rand() % 69);
+        lvl = (rand() % 2);
         element = (rand() % 3);
         switch (element){
             case 0:
@@ -97,7 +97,7 @@ int main() {
     }
     m.drawMap();
     m.getCell(0,0).printInfo();
-
+    
     try{
         string command;
         while (true) {
@@ -145,6 +145,9 @@ int main() {
                 // Engimon[i].Move(&m);
                 Engimon[i].assertPosition(&m); //haruss sebelom drawMap OK
                 // cout << Engimon[i].getName() << endl;
+                cout << Engimon[i].getName();
+                cout << Engimon[i].getNSkill() << endl;
+                cout << Engimon[i].getSkill()[0].getSkillName() << endl;
             }
             m.drawMap();
             m.getPlayer().getPosition().print();   

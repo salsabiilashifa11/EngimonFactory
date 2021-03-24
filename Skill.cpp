@@ -7,7 +7,7 @@ using namespace std;
     Skill::Skill() {
         this->element = new string[5];
         this->nElement= 0;
-        this->skillName = "XXX";
+        this->skillName = "YYY";
         this->basePower = 0;
         this->masteryLevel = 0;
     }
@@ -49,8 +49,8 @@ using namespace std;
     }
 
     void Skill::addElement(string element){
-        this->nElement +=1;
         this->element[this->nElement] = element;
+        this->nElement +=1;
     }
 
     string* Skill::getElement(){

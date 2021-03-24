@@ -228,8 +228,11 @@ void Player::Battle(Engimon& musuh){
         baru.setLevel(musuh.getLevel());
         baru.setExperience(musuh.getExperience());
         baru.setCumulativeExperience(musuh.getCumulativeExperience());
+        addToInventory(baru);
         //Nambahin skill items
-        if (musuh.getNSkill() != 0){
+        if (musuh.getNSkill() > 0){
+            cout<<"Hai"<<endl;
+            cout << "nama skill : " << musuh.getSkill()[0].getSkillName() << endl;
             SkillItems skillItemBaru(musuh.getSkill()[0],1);
             this->addToInventory(skillItemBaru);
         }

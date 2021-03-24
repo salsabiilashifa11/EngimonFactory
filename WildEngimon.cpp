@@ -36,12 +36,12 @@ WildEngimon::WildEngimon(string species, string element, int level, int x, int y
         basePower = 140;
     }
     int masteryLevel = 1;
-    Skill skill(namaSkill,basePower,masteryLevel);
+    Skill s(namaSkill,basePower,masteryLevel);
     this->elements[0] = element;
     this->nElements = 1;
-    skill.addElement(this->elements[0]);
+    s.addElement(this->elements[0]);
     this->nSkill = 0;
-    this->addSkill(skill);
+    this->addSkill(s);
     this->level = level;
     this->experience = 0;
     this->cumulativeExperience = this->level*100;
@@ -51,10 +51,16 @@ WildEngimon::WildEngimon(string species, string element, int level, int x, int y
 
 
 void WildEngimon::operator=(const WildEngimon &other){
+    // panggil ini aja
+    // Engimon::operator=(other);
     this->name = other.species;
     this->species = other.species;
-    this->skill = other.skill;
     this->nSkill = other.nSkill;
+    delete[] this->skill;
+    this->skill = new Skill[this->nSkill];
+    for (int i = 0;i<this->nSkill;i++){
+        this->skill[i] = other.skill[0];
+    }
     delete[] this->elements;
     this->elements = new string[4];
     this->elements[0] = other.elements[0];
