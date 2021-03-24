@@ -16,7 +16,7 @@ int main() {
         Player p("danan");
 
         Map m("map.txt", p);
-        m.updateMap();
+        m.updatePlayer();
         m.drawMap();
         m.getCell(0,0).printInfo();
         
@@ -45,7 +45,6 @@ int main() {
 
         cout << "DEBUG SHIFA" << endl;
         p.addToInventory(pikachu);
-        p.setActiveIndex(0);
         p.getActiveEngimon().displayDetail();
 
         //WildEngimon Spawning DEBUGGGG
@@ -68,18 +67,22 @@ int main() {
             switch (command) {
                 case 'w':
                     m.getPlayer().Move('w');
-                    wildengimon.Move(&m);
+                    m.updatePlayer();
+                    wildengimon.Move(&m); //WILD ENGIMON MOVE HARUS SESUDAH UPDATEPLAYER
                     break;
                 case 'a':
                     m.getPlayer().Move('a');
+                    m.updatePlayer();
                     wildengimon.Move(&m);
                     break;
                 case 's':
                     m.getPlayer().Move('s');
+                    m.updatePlayer();
                     wildengimon.Move(&m);
                     break;
                 case 'd':
                     m.getPlayer().Move('d');
+                    m.updatePlayer();
                     wildengimon.Move(&m);
                     break;
                 case 'b':
@@ -93,7 +96,6 @@ int main() {
             if (command == 'q') {
                 break;
             }
-            m.updateMap();
             m.drawMap();
             m.getPlayer().getPosition().print();
         }

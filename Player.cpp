@@ -3,19 +3,15 @@
 Player::Player(){
     name = "";
     setPosition(0,0);
-    OwnedEngimon temp("pikachu","kadal");
-    active = temp;
-    activeIndex = -1;
-    active.setPosition(0,1);
+    this->makeEngimon();
+    this->initiateSkill();
 }
 
 Player::Player(string _name){
     this->name = _name;
     setPosition(0,0);
-    OwnedEngimon temp("pikachu","kadal");
-    active = temp;
-    activeIndex = 0;
-    active.setPosition(0,1);
+    this->makeEngimon();
+    this->initiateSkill();
 }
 
 // default constructor for player
@@ -26,23 +22,30 @@ Player::~Player(){
 void Player::operator=(const Player& p) {
     name = p.name;
     setPosition(p.getPosition().getX(), p.getPosition().getY());
-    activeIndex = p.activeIndex;
+    // activeIndex = p.activeIndex;
 }
 
 // Commands
 void Player::Move(char _direction){
     Position temp = getPosition();
-    if (_direction == 'w' and validMove(_direction)){
-        setPosition(temp.getX()-1, temp.getY());
-    } else if (_direction == 'a' and validMove(_direction)) {
-        setPosition(temp.getX(), temp.getY()-1);
-    } else if (_direction == 's' and validMove(_direction)) {
-        setPosition(temp.getX()+1, temp.getY());
-    } else if (_direction == 'd' and validMove(_direction)) {
-        setPosition(temp.getX(), temp.getY()+1);
+    if (validMove(_direction)) {
+
+        //Engimon follow
+        active.setPosition(temp.getX(),temp.getY());
+
+        if (_direction == 'w'){
+            setPosition(temp.getX()-1, temp.getY());
+        } else if (_direction == 'a') {
+            setPosition(temp.getX(), temp.getY()-1);
+        } else if (_direction == 's') {
+            setPosition(temp.getX()+1, temp.getY());
+        } else if (_direction == 'd') {
+            setPosition(temp.getX(), temp.getY()+1);
+        } 
     } else {
-        throw ("Nabrak broo");
+            throw ("Nabrak broo");
     }
+    
 }
 
 bool Player::validMove(char _direction) {
@@ -105,65 +108,78 @@ void Player::Breed(Engimon& father, Engimon& mother){
         int i = 0;
         int j = 0;
         while (child.getNSkill() <= 4 && (i < father.getNSkill() || j < mother.getNSkill())){
-            if (father.getSkill()[i].getMasteryLevel() >= mother.getSkill()[j].getMasteryLevel()){  // Kalo level abi di currIdx lebih gede dari umi
-                for (int k = 0; k < child.getNElements(); i++){
-                    if (father.isCorrectElement(child.getElements()[0])){  // Kalo elemen skill abi compatible
-                        child.addSkill(father.getSkill()[k]);
-                        if (mother.isMemberSkill(father.getSkill()[i].getSkillName())){ // Kalo umi juga punya skill yang sama
+            if (father.getSkill()[i].getMasteryLevel() >= mother.getSkill()[j].getMasteryLevel()){
+                for (int l = 0; l < child.getNElements() && child.getNSkill() <= 4; l++){
+                    cout << "ini l : " << l << endl;
+                    if (!father.isCorrectElement(child.getElements()[l]) && !child.isMemberSkill(father.getElements()[i])){
+                        child.addSkill(father.getSkill()[i]);
+                        if (!mother.isMemberSkill(father.getSkill()[i].getSkillName())){
                             int skillIdx = mother.findSkillIndex(father.getSkill()[i].getSkillName());
-                            if (father.getSkill()[i].getMasteryLevel() == mother.getSkill()[skillIdx].getMasteryLevel()){   // Kalo levelnya sama
-                                child.getSkill()[child.getNSkill()-1].setMasteryLevel(father.getSkill()[i].getMasteryLevel()+1);
-                            } else {    // Kalo levelnya beda
-                                child.getSkill()[child.getNSkill()-1].setMasteryLevel(max(father.getSkill()[i].getMasteryLevel(), mother.getSkill()[skillIdx].getMasteryLevel()));
-                            }
-                            
-                        }
-                    i++;
-                    } else if (mother.isCorrectElement(child.getElements()[k])){   // Kalo elemen skill umi compatible
-                        child.addSkill(mother.getSkill()[j]);
-                        if (father.isMemberSkill(mother.getSkill()[j].getSkillName())){ // Kalo abi punya skill yang sama
-                            int skillIdx = father.findSkillIndex(mother.getSkill()[j].getSkillName());
-                            if (mother.getSkill()[j].getMasteryLevel() == mother.getSkill()[skillIdx].getMasteryLevel()){   // Kalo levelnya sama
-                                child.getSkill()[child.getNSkill()-1].setMasteryLevel(mother.getSkill()[j].getMasteryLevel()+1);
-                            } else {    // Kalo levelnya beda
-                                child.getSkill()[child.getNSkill()-1].setMasteryLevel(max(mother.getSkill()[j].getMasteryLevel(), father.getSkill()[skillIdx].getMasteryLevel()));
-                            }
-                            
-                        }
-                        j++;
-                    }
-                    break;
-                }
-            } else {
-                for (int k = 0; k < child.getNElements(); i++){
-                    if (mother.isCorrectElement(child.getElements()[k])){   // Kalo elemen skill umi compatible
-                        child.addSkill(mother.getSkill()[j]);
-                        if (father.isMemberSkill(mother.getSkill()[j].getSkillName())){ // Kalo abi punya skill yang sama
-                            int skillIdx = father.findSkillIndex(mother.getSkill()[j].getSkillName());
-                            if (mother.getSkill()[j].getMasteryLevel() == mother.getSkill()[skillIdx].getMasteryLevel()){   // Kalo levelnya sama
-                                child.getSkill()[child.getNSkill()-1].setMasteryLevel(mother.getSkill()[j].getMasteryLevel()+1);
-                            } else {    // Kalo levelnya beda
-                                child.getSkill()[child.getNSkill()-1].setMasteryLevel(max(mother.getSkill()[j].getMasteryLevel(), father.getSkill()[skillIdx].getMasteryLevel()));
-                            }   
-                        }
-                        j++;
-                    } else if (father.isCorrectElement(child.getElements()[0])){  // Kalo elemen skill abi compatible
-                        child.addSkill(father.getSkill()[k]);
-                        if (mother.isMemberSkill(father.getSkill()[i].getSkillName())){ // Kalo umi juga punya skill yang sama
-                            int skillIdx = mother.findSkillIndex(father.getSkill()[i].getSkillName());
-                            if (father.getSkill()[i].getMasteryLevel() == mother.getSkill()[skillIdx].getMasteryLevel()){   // Kalo levelnya sama
-                                child.getSkill()[child.getNSkill()-1].setMasteryLevel(father.getSkill()[i].getMasteryLevel()+1);
-                            } else {    // Kalo levelnya beda
-                                child.getSkill()[child.getNSkill()-1].setMasteryLevel(max(father.getSkill()[i].getMasteryLevel(), mother.getSkill()[skillIdx].getMasteryLevel()));
-                            }
-                            
+                            if (skillIdx != -1){
+                                if (father.getSkill()[i].getMasteryLevel() == mother.getSkill()[skillIdx].getMasteryLevel()){   // Kalo levelnya sama
+                                    child.getSkill()[child.getNSkill()-1].setMasteryLevel(father.getSkill()[i].getMasteryLevel() + 1);
+                                } else {    // Kalo levelnya beda
+                                    child.getSkill()[child.getNSkill()-1].setMasteryLevel(max(father.getSkill()[i].getMasteryLevel(), mother.getSkill()[skillIdx].getMasteryLevel()));
+                                }
+                            } 
                         }
                         i++;
+                    } else if (!mother.isCorrectElement(child.getElements()[l]) && !child.isMemberSkill(mother.getElements()[j])){
+                        child.addSkill(mother.getSkill()[j]);
+                        if (!father.isMemberSkill(mother.getSkill()[j].getSkillName())){
+                            int skillIdx = father.findSkillIndex(mother.getSkill()[j].getSkillName());
+                            if (skillIdx != -1){
+                                if (mother.getSkill()[j].getMasteryLevel() == father.getSkill()[skillIdx].getMasteryLevel()){
+                                    child.getSkill()[child.getNSkill()-1].setMasteryLevel(father.getSkill()[i].getMasteryLevel() + 1);
+                                } else {
+                                    child.getSkill()[child.getNSkill()-1].setMasteryLevel((max(father.getSkill()[skillIdx].getMasteryLevel(), mother.getSkill()[j].getMasteryLevel())));
+                                }
+                            }
+                        }
+                        j++;
+                    } else {
+                        i++;
+                        j++;
                     }
-                    break;
                 }
-
+            } else {
+                for (int l = 0; l < child.getNElements() && child.getNSkill() <= 4; l++){
+                    if (!mother.isCorrectElement(child.getElements()[l]) && !child.isMemberSkill(mother.getElements()[j])){
+                        child.addSkill(mother.getSkill()[j]);
+                        if (!father.isMemberSkill(mother.getSkill()[j].getSkillName())){
+                            int skillIdx = father.findSkillIndex(mother.getSkill()[j].getSkillName());
+                            if (skillIdx != -1){
+                                if (mother.getSkill()[j].getMasteryLevel() == father.getSkill()[skillIdx].getMasteryLevel()){
+                                    child.getSkill()[child.getNSkill()-1].setMasteryLevel(father.getSkill()[i].getMasteryLevel() + 1);
+                                } else {
+                                    child.getSkill()[child.getNSkill()-1].setMasteryLevel((max(father.getSkill()[skillIdx].getMasteryLevel(), mother.getSkill()[j].getMasteryLevel())));
+                                }
+                            }
+                        }
+                        j++;
+                    } else if (!father.isCorrectElement(child.getElements()[l]) && !child.isMemberSkill(father.getElements()[i])){
+                        child.addSkill(father.getSkill()[i]);
+                        if (!mother.isMemberSkill(father.getSkill()[i].getSkillName())){
+                            int skillIdx = mother.findSkillIndex(father.getSkill()[i].getSkillName());
+                            if (skillIdx != -1){
+                                if (father.getSkill()[i].getMasteryLevel() == mother.getSkill()[skillIdx].getMasteryLevel()){   // Kalo levelnya sama
+                                    child.getSkill()[child.getNSkill()-1].setMasteryLevel(father.getSkill()[i].getMasteryLevel() + 1);
+                                } else {    // Kalo levelnya beda
+                                    child.getSkill()[child.getNSkill()-1].setMasteryLevel(max(father.getSkill()[i].getMasteryLevel(), mother.getSkill()[skillIdx].getMasteryLevel()));
+                                }
+                            } 
+                        }
+                        i++;
+                    } else {
+                        i++;
+                        j++;
+                    }
+                }
             }
+            // cout << "ini i :" << i << endl;
+            // i++; 
+            //cout << "ini j :" << j << endl;
+            j++;
         }
         // Level 
         child.setLevel(0);
@@ -177,7 +193,46 @@ void Player::Breed(Engimon& father, Engimon& mother){
         child.displayDetail();
         playerEngimons.append(child);
     } else {
-        throw ("Gabisa breed. Butuh Nurdin brou");
+        throw ("Gabisa breed.");
+    }
+}
+
+void Player::Battle(Engimon& musuh){
+    bool menang = active.fight(musuh);
+    if (!menang){
+        cout << "Kalah battle" << endl;
+        playerEngimons.deleteAt(playerEngimons.indexByName(active.getName()));
+        if (playerEngimons.n_elmt() == 0) {
+            throw "Engimon abis, kamu kalah";
+        }
+        else{
+            setActiveEngimon(0);
+        }
+    }
+    else{
+        cout << "Kamu memenangkan battle" << endl;
+        musuh.setStatus("dead");
+        if (playerEngimons.n_elmt() + playerItems.n_elmt() >= MAX_EL) {
+            cout << "Inventory penuh" << endl;
+            return;
+        }
+        //Nambahin engimon
+        OwnedEngimon baru;
+        baru.setParentName("", "");
+        baru.setName(musuh.getName());
+        baru.setSpecies(musuh.getSpecies());
+        baru.addElements(musuh.getElements()[0]);
+        for (int i = 0; i < musuh.getNSkill(); i++) {
+            baru.addSkill(musuh.getSkill()[i]);
+        }
+        baru.setLevel(musuh.getLevel());
+        baru.setExperience(musuh.getExperience());
+        baru.setCumulativeExperience(musuh.getCumulativeExperience());
+        //Nambahin skill items
+        if (musuh.getNSkill() != 0){
+            SkillItems skillItemBaru(musuh.getSkill()[0],1);
+            this->addToInventory(skillItemBaru);
+        }
     }
 }
 
@@ -211,38 +266,39 @@ string Player::getName() {
     return name;
 }
 
-int Player::getActiveIndex(){
-    return activeIndex;
-}
+// int Player::getActiveIndex(){
+//     return activeIndex;
+// }
 
 Position Player::getPosition() const {
     return playerPos;
 }
 
-// void Player::setActiveEngimon(){}
+void Player::setActiveEngimon(int i){
+    active = playerEngimons[i];
+}
 
 void Player::setPosition(int _x, int _y) {
     playerPos.setX(_x);
     playerPos.setY(_y);
 }
 
-void Player::setActiveIndex(int i) {
-    activeIndex = i;
-    active = playerEngimons[activeIndex];
-}
+// void Player::setActiveIndex(int i) {
+//     activeIndex = i;
+//     active = playerEngimons[activeIndex];
+// }
 
 void Player::addToInventory(OwnedEngimon el) {
-    if (playerEngimons.n_elmt() + playerItems.n_elmt() > MAX_EL) {
-        throw "Inventory penuh";
+    if (playerEngimons.n_elmt() + playerItems.n_elmt() < MAX_EL) {
+        playerEngimons.append(el);
     }
-    playerEngimons.append(el);
 }
 
 void Player::addToInventory(SkillItems el) {
-    if (playerEngimons.n_elmt() + playerItems.n_elmt() > MAX_EL) {
-        throw "Inventory penuh";
+    if (playerEngimons.n_elmt() + playerItems.n_elmt() < MAX_EL) {
+        playerItems.append(el);
     }
-    playerItems.append(el);
+    
 }
 
 void Player::showInventory() {
@@ -251,3 +307,43 @@ void Player::showInventory() {
     cout << "Skill items: " << endl;
     playerItems.displayAll();
 }
+
+void Player::makeEngimon() {
+    //Engimon
+    OwnedEngimon temp("pikachu","kadal");
+    temp.addElements("ice");
+    temp.setLevel(50);
+    Skill s("libasan ekor keadilan",100,1);
+    s.addElement("ice");
+    temp.addSkill(s);
+    this->addToInventory(temp);
+    //Active Engimon
+    active = temp;
+    // activeIndex = 0;
+    active.setPosition(this->playerPos.getX(),this->playerPos.getY()+1);
+}
+
+void Player::initiateSkill() {
+    //Inventory Skill Item
+    Skill s1("Pesanan es teh manis",100,1);
+    s1.addElement("ice");
+    Skill s2("Kekuatan kencing di dalam celana",100,1);
+    s2.addElement("water");
+    Skill s3("Seruputan rokok sampoerna",100,1);
+    s3.addElement("fire");
+    Skill s4("Stone Holder",100,1);
+    s4.addElement("ground");
+    Skill s5("PLN mati lampu",100,1);
+    s5.addElement("electric");
+    SkillItems sk1(s1,1);
+    SkillItems sk2(s2,1);
+    SkillItems sk3(s3,1);
+    SkillItems sk4(s4,1);
+    SkillItems sk5(s5,1);
+    this->addToInventory(sk1);
+    this->addToInventory(sk2);
+    this->addToInventory(sk3);
+    this->addToInventory(sk4);
+    this->addToInventory(sk5);
+}
+

@@ -7,9 +7,9 @@ Engimon::Engimon() {
     nSkill = 0;
     elements = new string[5];
     nElements = 0;
-    level = 0;
-    experience = 0;
-    cumulativeExperience = 0;  //kalau mencapai 0, mati
+    level = 1;
+    experience = 500;
+    cumulativeExperience = 500;  //kalau mencapai 0, mati
 }
 
     // Engimon::Engimon(string name, const Engimon &mother, const Engimon &father){
@@ -104,6 +104,7 @@ int Engimon::getLevel() {
 }
 void Engimon::setLevel(int level) {
     this->level = level;
+    this->cumulativeExperience = (level-1)*100;
 }
 
 int Engimon::getExperience() {

@@ -3,7 +3,8 @@
 using namespace std;
 
 SkillItems::SkillItems(){
-    Skill item_skill;
+    Skill temp;
+    item_skill = temp;
     quantity =1;
 }
 

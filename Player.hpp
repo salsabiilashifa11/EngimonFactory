@@ -19,9 +19,11 @@ class Player {
         string name;
         Position playerPos;
         OwnedEngimon active;
-        int activeIndex;
+        // int activeIndex;
         Inventory<OwnedEngimon> playerEngimons;
         Inventory<SkillItems> playerItems;
+        void makeEngimon();
+        void initiateSkill();   
 
     public :
         Player();
@@ -36,22 +38,22 @@ class Player {
         bool validMove(char _direction);
         // void changeEngimon();
         void Breed(Engimon& father, Engimon& mother);
+        void Battle(Engimon& musuh);
         // void checkEngimon();
         // void useItem(SkillItems);
 
         // // display
         // void displayEngimon();
-        // void displaySkillItem();
         // void detailEngimon();
 
         // Getter Setter
         OwnedEngimon& getActiveEngimon();
         string getName();
-        int getActiveIndex();
+        // int getActiveIndex();
         Position getPosition() const;
-        // void setActiveEngimon();
+        void setActiveEngimon(int i);
         void setPosition(int _x, int _y);
-        void setActiveIndex(int i);
+        // void setActiveIndex(int i);
 
         void addToInventory(OwnedEngimon el);
         void addToInventory(SkillItems el);

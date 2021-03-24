@@ -28,6 +28,7 @@ class WildEngimon : public Engimon {
 
     Position getPosition();
     void setPosition(int, int, Map* m);
+    void assertPosition(Map* m);
     void Move(Map* m);
 
     bool validPosition(Map* m, int x, int y);

@@ -1,6 +1,7 @@
 #include "Map.hpp"
+#include "WildEngimon.hpp"
 
-// namespace EngimonFactory{
+
     Map::Map() {
         filename = "game.txt";
         for (int i = 0; i < MAP_HEIGHT; i++) {
@@ -101,11 +102,13 @@
         return type;
     }
 
-    void Map::updateMap() {
-        Player temp;
+    void Map::updatePlayer() {
+        Player tempP;
+        Engimon* tempE = new WildEngimon();
         for (int i = 0; i < MAP_HEIGHT; i++) {
             for (int j = 0; j < MAP_WIDTH; j++) {
-                map[i][j].setPlayer(temp);
+                map[i][j].setPlayer(tempP);
+                map[i][j].setEngimon(tempE);
             }
         }
         map[player.getPosition().getX()][player.getPosition().getY()].setPlayer(player);
@@ -113,10 +116,32 @@
             .setEngimon(&player.getActiveEngimon());
     }
 
+    // bool Map::adaEnemy() {
+    //     int i,j;
+    //     Position posisiPlayer = this->getPlayer().getPosition();
+    //     for (i=-1;i<=1;i++){
+    //         for (j=-1;j<=1;j++){
+    //             if (map[posisiPlayer.getX()+i][posisiPlayer.getY()+j].getOccupierE()->getName() != "XXX" 
+    //             && map[posisiPlayer.getX()+i][posisiPlayer.getY()+j].getOccupierE()->getStatus() == "wild"){
+    //                 return true;
+    //             }
+    //         }
+    //     }
+    //     return false;
+    // }
 
-// }
-
-
-
-
-// Engimon Map::getOccupierE(char c);
+    Cell& Map::getEnemy() {
+        int i,j,a,b;
+        Position posisiPlayer = this->getPlayer().getPosition();
+        for (i=-1;i<=1;i++){
+            for (j=-1;j<=1;j++){
+                if (posisiPlayer.getX()+i < 30 && posisiPlayer.getX()+i > 0  && posisiPlayer.getY()+j < 30 && posisiPlayer.getY()+j > 0){
+                    if (map[posisiPlayer.getX()+i][posisiPlayer.getY()+j].getOccupierE()->getName() != "XXX" 
+                    && map[posisiPlayer.getX()+i][posisiPlayer.getY()+j].getOccupierE()->getStatus() == "wild"){
+                        return map[posisiPlayer.getX()+i][posisiPlayer.getY()+j];
+                    }
+                }
+            }
+        }
+        return map[posisiPlayer.getX()][posisiPlayer.getY()];
+    }

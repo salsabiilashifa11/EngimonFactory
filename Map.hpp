@@ -32,10 +32,12 @@ using namespace std;
         //Methods
         void drawMap();
         CellType getType(char c);
-        void updateMap();
+        void updatePlayer();
         //void spawn(int input);
         // Engimon getOccupierE(char c);
         // void saveMap();
+        // bool adaEnemy();
+        Cell& getEnemy();
         
     };
 // }

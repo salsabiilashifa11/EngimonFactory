@@ -9,6 +9,8 @@ using namespace std;
 
 template <class T>
 class Inventory {
+    private:
+        vector<T> container;
     public:
         T operator[](int i){
             return container.at(i);   
@@ -43,8 +45,7 @@ class Inventory {
             return -1;
         }
 
-    private:
-        vector<T> container;
+
 };
 
 template<>

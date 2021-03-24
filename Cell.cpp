@@ -62,32 +62,34 @@ void Cell::setEngimon(Engimon* e) {
 
 //Method
 void Cell::drawCell() {
-    //Check for player and engimon occupiers
-    if (occupierP.getName() == "" && occupierE->getName() == "XXX") {
+    
+    //Condition 1: player
+    if (occupierP.getName() != "") {
+        cout << "P";
+    } 
+    //Condition 2: Alive engimons
+    else if (occupierE->getStatus() != "dead" && occupierE->getName() != "XXX") {
+        drawEngimon(10);
+    }
+    //Condition 3: dummy occupiers
+    else {
         if (type == Sea) {
             cout << "o";
         } else {
             cout << "-";
         }
-    } else if (occupierP.getName() != "") {
-        cout << "P";
-    } else {
-        drawEngimon(10);
-    }
+    } 
 
 }
 
 void Cell::drawEngimon(int level_min) {
-    //Check for playe occupiers
-    // int engimonType, rand1;
-    // srand (time(NULL));
-    // engimonType = rand() % 8 + 1;
-    // rand1 = rand() % (input-1) + 1;
 
     string element = occupierE->getElements()[0];
     int level = occupierE->getLevel();
     
-    if (element == "fire"){
+    if (occupierE->getStatus() == "owned") {
+        cout << "&";
+    } else if (element == "fire"){
         if (level < level_min){
             cout << "f";
         } else {
@@ -126,4 +128,8 @@ void Cell::printInfo() {
     cout << "x      : " << x << endl;
     cout << "y      : " << y << endl;
     cout << "type   : " << type << endl;
+}
+
+Player& Cell::getOccupierP(){
+    return this->occupierP;
 }

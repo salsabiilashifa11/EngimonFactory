@@ -41,4 +41,4 @@ using namespace std;
 // }
 //list of species dengan skillnya
 
-#endif
+#endift

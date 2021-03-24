@@ -40,8 +40,8 @@ WildEngimon::WildEngimon(string species, string element, int level, int x, int y
     this->elements[0] = element;
     this->nElements = 1;
     skill.addElement(this->elements[0]);
+    this->nSkill = 0;
     this->addSkill(skill);
-    this->nSkill = 1;
     this->level = level;
     this->experience = 0;
     this->cumulativeExperience = this->level*100;
@@ -87,7 +87,11 @@ void WildEngimon::setPosition(int x, int y, Map* m) {
     position.setX(x);
     position.setY(y);
 
-    m->getCell(x, y).setEngimon(this);
+    // m->getCell(x, y).setEngimon(this);
+}
+
+void WildEngimon::assertPosition(Map* m) {
+    m->getCell(position.getX(), position.getY()).setEngimon(this);
 }
 
 

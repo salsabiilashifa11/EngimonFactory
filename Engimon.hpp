@@ -30,9 +30,9 @@ using namespace std;
         void levelUp();
         void increaseXP(int);
         //void interact();
-
         virtual void displayDetail() = 0;  //berisi semua informasi atribut engimon
-
+        virtual string getStatus() = 0;
+        virtual void setStatus(string) = 0;
         //Getter and setter
         string getName();
         void setName(string);

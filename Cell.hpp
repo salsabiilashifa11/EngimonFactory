@@ -28,6 +28,7 @@ class Cell {
         int getX();
         int getY();
         CellType getType();
+        Player& getOccupierP();
         Engimon* getOccupierE();
 
         //Setter
