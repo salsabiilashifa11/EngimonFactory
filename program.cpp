@@ -98,8 +98,6 @@ int main() {
     m.drawMap();
     m.getCell(0,0).printInfo();
 
-    
-
     try{
         string command;
         while (true) {

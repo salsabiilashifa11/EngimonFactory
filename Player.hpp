@@ -10,7 +10,7 @@
 #include "OwnedEngimon.hpp"
 #include "ElementAdvantage.hpp"
 #include "Inventory.hpp"
-// #include "SkillItems.hpp"
+#include "SkillItems.hpp"
 
 #define MAX_EL 15
 using namespace std;

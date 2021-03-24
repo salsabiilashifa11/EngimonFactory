@@ -13,7 +13,7 @@ class Inventory {
         vector<T> container;
     public:
         T operator[](int i){
-            return container.at(i);   
+            return container.at(i);
         }
         T deleteAt(int i){
             T temp = container.at(i);
