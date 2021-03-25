@@ -409,6 +409,30 @@ void Player::makeEngimon() {
     temp.addSkill(s2);
     temp.addSkill(s3);
     this->addToInventory(temp);
+
+    OwnedEngimon tes1("raichu","kecoa");
+    tes1.addElements("water");
+    tes1.addElements("ice");
+    tes1.setLevel(200);
+    Skill st1("serudukan tanduk keputusasaan",100,5);
+    st1.addElement("water");
+    Skill st2("teriakan ultrasonic kemarahan",100,5);
+    st2.addElement("ground");
+    tes1.addSkill(st1);
+    tes1.addSkill(st2);
+    this->addToInventory(tes1);
+
+    OwnedEngimon tes2("mewtwo", "siamang");
+    tes2.addElements("ground");
+    tes2.addElements("electric");
+    tes2.setLevel(200);
+    Skill stt1("tembakan gelembung kebebasan",100,1);
+    Skill stt2("cakaran cakar kematian",100,1);
+    stt1.addElement("fire");
+    stt2.addElement("electric");
+    tes2.addSkill(stt1);
+    tes2.addSkill(stt2);
+    this->addToInventory(tes2);
     //Active Engimon
     active = temp;
     active.setPosition(this->playerPos.getX(),this->playerPos.getY()+1);
