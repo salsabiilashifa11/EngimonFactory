@@ -3,7 +3,7 @@ TO DO :
 1. Update battle 2 elemen
 2. Mapping nama spesies yang dual elemen
 3. update spesies breeding
-4. 
+4. update learn 2 elemen
 
 
 
