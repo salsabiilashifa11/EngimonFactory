@@ -127,8 +127,6 @@ void OwnedEngimon::moveActive(int x, int y){
     }
 }
 
-
-
 bool OwnedEngimon::fight(Engimon& enemy) {
     float myPower = 0;
     myPower += getStrongestEl(enemy) * this->level;
@@ -147,5 +145,3 @@ bool OwnedEngimon::fight(Engimon& enemy) {
 
     return myPower > enemyPower;
 }
-
-

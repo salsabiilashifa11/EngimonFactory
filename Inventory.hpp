@@ -12,7 +12,7 @@ class Inventory {
     private:
         vector<T> container;
     public:
-        T operator[](int i){
+        T& operator[](int i){
             return container.at(i);
         }
         T deleteAt(int i){
@@ -76,7 +76,7 @@ inline void Inventory<SkillItems>::displayAll() {
         return;
     }
     for (int i = 0; i < container.size(); i++) {
-        cout << i+1 << ". " << container[i].getName() << " (qty: " <<
+    cout << i+1 << ". " << container[i].getName() << " (qty: " <<
             container[i].getQuantity() << ")" << endl;
     }
 }
@@ -95,4 +95,3 @@ inline SkillItems Inventory<SkillItems>::deleteAt(int i){
 
 
 #endif
-                

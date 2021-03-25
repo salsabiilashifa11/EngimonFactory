@@ -74,7 +74,7 @@ void WildEngimon::operator=(const WildEngimon &other){
 }
 
 WildEngimon::~WildEngimon(){
-    cout << "Engimon Dibunuh" << endl;
+    
 }
 
 string WildEngimon::getStatus(){
@@ -136,6 +136,7 @@ void WildEngimon::Move(Map* m){
 
 bool WildEngimon::validPosition(Map* m, int x, int y) {
     CellType Wtype;
+    Cell cell =  m->getCell(x,y);
     switch(element2int(getElements()[0])){
         case 1:
             Wtype = Grassland;
@@ -148,24 +149,14 @@ bool WildEngimon::validPosition(Map* m, int x, int y) {
     }
     if (x < 0  || x >= 30 || 
         y < 0 || y >=30 || 
-        Wtype != m->getCell(x,y).getType()) {
+        Wtype != cell.getType() ||
+        cell.getOccupierE()->getName() != "XXX" ||
+        cell.getOccupierP().getName() != "")
+         {
             //throw("Kambing cuma bisa di air cuy");
             return false;
         } 
     return true;
-
-
-    
-    // Position(this->x,this->y);
-    
-    /*position.gettype()
-    if (ctype.getType() != Wtype){
-        return false;
-    } else {
-        return true;
-    }*/
-    
-    //ctype.getType().getX();
 }
 
 void WildEngimon::displayDetail() {

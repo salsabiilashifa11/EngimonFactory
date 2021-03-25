@@ -37,3 +37,7 @@ void SkillItems::addQuantity(int n) {
 string SkillItems::getName() {
     return item_skill.getSkillName();
 }
+
+Skill SkillItems::getSkill() {
+    return this->item_skill;
+}

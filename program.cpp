@@ -4,6 +4,7 @@
 #include "WildEngimon.hpp"
 #include <cstdlib>
 #include <ctime>
+#include <string>
 #include <iostream>
 using namespace std;
 
@@ -28,10 +29,9 @@ int main() {
 
     //Inisialisasi Engimon di air
     for (int i = 0; i < JumlahEngimonAir; i++){
-        // 0<x=10 20<y<=30
         posisiX = (rand() % 10);
         posisiY = (rand() % 10) + 20;
-        lvl = (rand() % 2);
+        lvl = (rand() % 50);
         element = (rand() % 2);
         switch (element){
             case 0:
@@ -50,7 +50,7 @@ int main() {
     for (int i = 0; i < JumlahEngimonGrassland1; i++){
         posisiX = (rand() % 9) + 1;
         posisiY = (rand() % 20);
-        lvl = (rand() % 2);
+        lvl = (rand() % 50);
         element = (rand() % 3);
         switch (element){
             case 0:
@@ -75,7 +75,7 @@ int main() {
     for (int i = 0; i < JumlahEngimonGrassland2; i++){
         posisiX = (rand() % 20) +10;
         posisiY = (rand() % 30);
-        lvl = (rand() % 2);
+        lvl = (rand() % 50);
         element = (rand() % 3);
         switch (element){
             case 0:
@@ -135,7 +135,28 @@ int main() {
                 }
             }
             else if (command == "breed"){
-                cout<<"LOM JADI JING"<<endl;
+                p.MBA();
+            }
+            else if (command == "change"){
+                p.changeActiveEngimon();
+            }
+            else if (command == "detail") {
+                string namaEngimon;
+                cout << "Masukkan nama engimon: ";
+                cin >> namaEngimon;
+                p.displayEngimon(namaEngimon); //nanti ganti jadi input nama, terus
+            }
+            else if (command == "learn") {
+                p.showItems();
+                cout << "Pilih nama skill item yang ingin dipakai: ";
+                string skillName;
+                cin.ignore();
+                std::getline(std::cin, skillName);
+                p.showEngimons();
+                cout << "Pilih nama engimon yang ingin diajari: ";
+                string eName;
+                cin >> eName;
+                p.teach(skillName,eName);
             }
             else{
                 cout<<"Invalid Command"<<endl;
@@ -145,9 +166,6 @@ int main() {
                 // Engimon[i].Move(&m);
                 Engimon[i].assertPosition(&m); //haruss sebelom drawMap OK
                 // cout << Engimon[i].getName() << endl;
-                cout << Engimon[i].getName();
-                cout << Engimon[i].getNSkill() << endl;
-                cout << Engimon[i].getSkill()[0].getSkillName() << endl;
             }
             m.drawMap();
             m.getPlayer().getPosition().print();   

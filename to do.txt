@@ -1,0 +1,21 @@
+
+TO DO :
+1. Update battle 2 elemen
+2. Mapping nama spesies yang dual elemen
+3. update spesies breeding
+4. 
+
+
+
+
+
+NEED TEST :
+
+
+SOLVED :
+7. Breeding debug
+1. Nambahin + Ngecek kumulatif exp apakah udah lebih batas (tiap selesai battle), kalo udh lebih maks, make_list
+5. Menggunakan skill item
+6. Switch out engimon
+3. Implement learning skill
+4. Menampilkan data lengkap suatu engimon

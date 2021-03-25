@@ -72,8 +72,10 @@ void Engimon::levelUp() {
     }
 }
 void Engimon::increaseXP(int exp) {
+    cout<<"Nambah"<<endl;
     this->experience += exp;
     this->cumulativeExperience += exp;
+    this->levelUp();
 }
 
 //Getter and setter
@@ -104,6 +106,7 @@ int Engimon::getLevel() {
 }
 void Engimon::setLevel(int level) {
     this->level = level;
+    this->experience = 0;
     this->cumulativeExperience = (level-1)*100;
 }
 

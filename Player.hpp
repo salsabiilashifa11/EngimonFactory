@@ -5,7 +5,6 @@
 #include <stdlib.h>
 #include <iostream>
 
-
 #include "Position.hpp"
 #include "OwnedEngimon.hpp"
 #include "ElementAdvantage.hpp"
@@ -19,7 +18,6 @@ class Player {
         string name;
         Position playerPos;
         OwnedEngimon active;
-        // int activeIndex;
         Inventory<OwnedEngimon> playerEngimons;
         Inventory<SkillItems> playerItems;
         void makeEngimon();
@@ -36,28 +34,34 @@ class Player {
         // Commands
         void Move(char _direction);
         bool validMove(char _direction);
-        // void changeEngimon();
+        void changeActiveEngimon();
         void Breed(Engimon& father, Engimon& mother);
         void Battle(Engimon& musuh);
         // void checkEngimon();
         // void useItem(SkillItems);
 
         // // display
-        // void displayEngimon();
+        void displayEngimon(string _name);
+        void MBA();
         // void detailEngimon();
 
         // Getter Setter
         OwnedEngimon& getActiveEngimon();
         string getName();
-        // int getActiveIndex();
         Position getPosition() const;
         void setActiveEngimon(int i);
+        void activeMati();
         void setPosition(int _x, int _y);
-        // void setActiveIndex(int i);
 
         void addToInventory(OwnedEngimon el);
         void addToInventory(SkillItems el);
         void showInventory();
+        void showItems();
+        void showEngimons();
+        void useSkillItems();
+
+        void teach(string skillName, string eName);
+        
 };
 
 #endif

@@ -16,6 +16,7 @@ class SkillItems{
         int getQuantity() const;
         string getName();
         void addQuantity(int n);
+        Skill getSkill();
 
 };
 
