@@ -19,12 +19,14 @@ class Cell {
         Engimon* occupierE;
 
     public:
+        //4 Sekawan
         Cell();
         Cell(int _x, int _y, CellType _type);
         Cell(const Cell& c);
         void operator=(const Cell& c);
+        ~Cell();
 
-        //Getter
+        //Getter dan Setter
         int getX();
         int getY();
         CellType getType();

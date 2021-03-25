@@ -5,24 +5,18 @@ Engimon::Engimon() {
     species = "none";
     skill = new Skill[4];
     nSkill = 0;
-    elements = new string[5];
+    elements = new string[2];
     nElements = 0;
     level = 1;
-    experience = 500;
-    cumulativeExperience = 500;  //kalau mencapai 0, mati
+    experience = 0;
+    cumulativeExperience = 0;  
 }
-
-    // Engimon::Engimon(string name, const Engimon &mother, const Engimon &father){
-    //     this->name = name;
-    //     this->parentName[0] = mother.name;
-    //     this->parentName[1] = father.name;
-    // }
 
 Engimon::Engimon(const Engimon& e) {
     name = e.name;
     species = e.species;
     skill = new Skill[4];
-    elements = new string[5];
+    elements = new string[2];
     level = e.level;
     experience = e.experience;
     cumulativeExperience = e.cumulativeExperience;
@@ -72,7 +66,6 @@ void Engimon::levelUp() {
     }
 }
 void Engimon::increaseXP(int exp) {
-    cout<<"Nambah"<<endl;
     this->experience += exp;
     this->cumulativeExperience += exp;
     this->levelUp();
@@ -85,14 +78,6 @@ string Engimon::getName() {
 void Engimon::setName(string name) {
     this->name = name;
 }
-
-// string* Engimon::getParentName() {
-//     return this->parentName;
-// }
-// void Engimon::setParentName(string parentName1, string parentName2) {
-//     this->parentName[0] = parentName1;
-//     this->parentName[1] = parentName2; 
-// }
 
 string Engimon::getSpecies(){
     return this->species;
@@ -154,7 +139,7 @@ void Engimon::setNSkill(int n){
 bool Engimon::isMemberSkill(string skill){
     bool status = false;
     int i = 0;
-    while (status and (i < nSkill)){
+    while (!status and (i < nSkill)){
         if (this->skill[i].getSkillName() == skill) {
             status = true;
         } else {
@@ -167,7 +152,7 @@ bool Engimon::isMemberSkill(string skill){
 int Engimon::findSkillIndex(string skill){
     bool status = false;
     int i = 0;
-    while (status and (i < nSkill)){
+    while (!status and (i < nSkill)){
         if (this->skill[i].getSkillName() == skill) {
             status = true;
         } else {
@@ -184,7 +169,7 @@ int Engimon::findSkillIndex(string skill){
 bool Engimon::isCorrectElement(string childElements){
     bool status = false;
     int i = 0;
-    while (status and (i < nElements)){
+    while (!status and (i < nElements)){
         if (this->elements[i] == childElements) {
             status = true;
         } else {
@@ -247,8 +232,8 @@ void Engimon::setNElements(int n){
 float Engimon::getStrongestEl(Engimon& enemy) {
     float strongest = ElementAdvantage::getAdv(this->getElements()[0], enemy.getElements()[0]);
 
-    for (int i = 1; i < this->getNElements(); i++) {
-        for (int j = 1; j < enemy.getNElements(); j++) {
+    for (int i = 0; i < this->getNElements(); i++) {
+        for (int j = 0; j < enemy.getNElements(); j++) {
             float temp = ElementAdvantage::getAdv(this->getElements()[i], enemy.getElements()[j]);
             if (temp > strongest) {
                 strongest = temp;
@@ -258,5 +243,3 @@ float Engimon::getStrongestEl(Engimon& enemy) {
 
     return strongest;
 }
-// }
-

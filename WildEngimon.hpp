@@ -9,7 +9,6 @@
 #include "Map.hpp"
 
 using namespace std;
-// using namespace EngimonFactory;
 class WildEngimon : public Engimon {
    private:
     string status;

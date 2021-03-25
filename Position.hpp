@@ -6,33 +6,31 @@
 
 using namespace std;
 
-// namespace Position{
-    class Position {
-        private:
-            int x; //x coordinate
-            int y; //y coordinate
+class Position {
+    private:
+        int x; //x coordinate
+        int y; //y coordinate
 
-        public:
-            Position();
-            Position(int _x, int _y);
-            ~Position();
+    public:
+        Position();
+        Position(int _x, int _y);
+        ~Position();
 
-            // Operator Overloading
-            Position& operator=(const Position&);
+        // Operator Overloading
+        Position& operator=(const Position&);
 
-            //Getter
-            int getX();
-            int getY();
+        //Getter
+        int getX();
+        int getY();
 
-            //Setter
-            void setX(int _x);
-            void setY(int _y);
+        //Setter
+        void setX(int _x);
+        void setY(int _y);
 
-            //Methods
-            void print();
+        //Methods
+        void print();
 
-    };
-// }
+};
 
 
 #endif

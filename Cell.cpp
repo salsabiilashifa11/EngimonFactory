@@ -1,13 +1,11 @@
 #include "Cell.hpp"
 #include "WildEngimon.hpp"
 
+//4 Sekawan
 Cell::Cell() {
     x = -1;
     y = -1;
     type = Grassland;
-    // WildEngimon temp;
-    // Player temp;
-    // occupierP = temp;
     occupierE = new WildEngimon();
 }
 
@@ -15,7 +13,6 @@ Cell::Cell(int _x, int _y, CellType _type) {
     x = _x;
     y = _y;
     type = _type;
-    // WildEngimon temp;
     occupierE = new WildEngimon();
 }
 
@@ -35,7 +32,9 @@ void Cell::operator=(const Cell& c) {
     occupierE = c.occupierE;
 }
 
-//Getter
+Cell::~Cell(){}
+
+//Getter dan Setter
 int Cell::getX() {
     return x;
 }
@@ -69,7 +68,7 @@ void Cell::drawCell() {
     } 
     //Condition 2: Alive engimons
     else if (occupierE->getStatus() != "dead" && occupierE->getName() != "XXX") {
-        drawEngimon(10);
+        drawEngimon(30);
     }
     //Condition 3: dummy occupiers
     else {

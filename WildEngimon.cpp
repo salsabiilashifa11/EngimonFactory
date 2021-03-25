@@ -20,22 +20,27 @@ WildEngimon::WildEngimon(string species, string element, int level, int x, int y
     this->species = species;
     string namaSkill = spesiesSkill.find(this->species)->second;
     int basePower;
+    int masteryLevel;
     if (species == "kadal"){
         basePower = 100;
+        masteryLevel = 3;
     }
     else if (species == "ikan"){
         basePower = 110;
+        masteryLevel = 2;
     }
     else if (species == "kambing"){
         basePower = 120;
+        masteryLevel = 4;
     }
     else if (species == "beruang"){
-        basePower = 130;
+        basePower = 80;
+        masteryLevel = 2;
     }
     else if (species == "kelelawar"){
-        basePower = 140;
+        basePower = 90;
+        masteryLevel = 5;
     }
-    int masteryLevel = 1;
     Skill s(namaSkill,basePower,masteryLevel);
     this->elements[0] = element;
     this->nElements = 1;
@@ -51,8 +56,6 @@ WildEngimon::WildEngimon(string species, string element, int level, int x, int y
 
 
 void WildEngimon::operator=(const WildEngimon &other){
-    // panggil ini aja
-    // Engimon::operator=(other);
     this->name = other.species;
     this->species = other.species;
     this->nSkill = other.nSkill;
@@ -92,18 +95,29 @@ Position WildEngimon::getPosition(){
 void WildEngimon::setPosition(int x, int y, Map* m) {
     position.setX(x);
     position.setY(y);
-
-    // m->getCell(x, y).setEngimon(this);
 }
 
 void WildEngimon::assertPosition(Map* m) {
+
+    bool validPosition = false;
+    int prevX = position.getX();
+    int prevY = position.getY();
+
+    if (m->getCell(position.getX(), position.getY()).getOccupierP().getName() != "" ||
+        m->getCell(position.getX(), position.getY()).getOccupierE()->getName() != "XXX") {
+        while (!validPosition) {
+            Move(m);
+            if (position.getX() != prevX || position.getY() != prevY) {
+                validPosition = true;
+            }
+        }
+    }
+
     m->getCell(position.getX(), position.getY()).setEngimon(this);
 }
 
 
 void WildEngimon::Move(Map* m){
-    //get elemen
-    //, CellType Wtype
     int x = position.getX();
     int y = position.getY();
     int number;
@@ -147,28 +161,30 @@ bool WildEngimon::validPosition(Map* m, int x, int y) {
         default:
             break;
     }
-    if (x < 0  || x >= 30 || 
-        y < 0 || y >=30 || 
+    if (x < 1  || x >= 29 || 
+        y < 1 || y >=29 || 
         Wtype != cell.getType() ||
         cell.getOccupierE()->getName() != "XXX" ||
         cell.getOccupierP().getName() != "")
          {
-            //throw("Kambing cuma bisa di air cuy");
             return false;
         } 
     return true;
 }
 
 void WildEngimon::displayDetail() {
-    cout << "Nama : " << this->name << endl;
-    cout << "Species : " << this->species << endl;
-    cout << "Skill : ";
-    cout << " NamaSkill : " << this->skill[0].getSkillName();
-    cout << " BasePower : " << this->skill[0].getBasePower();
-    cout << " MasteryLevel : " << this->skill[0].getMasteryLevel();
-    cout << endl;
-    cout << "Element : ";
+    cout << "======================Info Musuh======================" << endl;
+    cout << "Nama           : " << this->name << endl;
+    cout << "Species        : " << this->species << endl;
+    cout << "Skill          : " << endl;
+    for (int i = 0; i< this->nSkill; i++){
+        cout << "    " << i+1 << ". ";
+        this->skill[i].displaySkill();
+        cout << endl;
+    }
+    cout << "Element        : ";
     cout << this->elements[0];
     cout << endl;
-    cout << "Level : " << this->level << endl;
+    cout << "Level          : " << this->level << endl;
+    // cout << "----------------------------------------------" << endl;
 }

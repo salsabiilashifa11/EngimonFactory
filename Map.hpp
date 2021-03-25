@@ -11,8 +11,7 @@ using namespace std;
 #define MAP_WIDTH 30
 #define MAP_HEIGHT 30
 
-// namespace EngimonFactory{
-    class Map {
+class Map {
     private:
         Cell map[MAP_HEIGHT][MAP_WIDTH];
         int width;
@@ -33,14 +32,8 @@ using namespace std;
         void drawMap();
         CellType getType(char c);
         void updatePlayer();
-        //void spawn(int input);
-        // Engimon getOccupierE(char c);
-        // void saveMap();
-        // bool adaEnemy();
         Cell& getEnemy();
-        
-    };
-// }
+};
 
 
 #endif

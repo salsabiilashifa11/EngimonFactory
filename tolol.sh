@@ -1,1 +1,0 @@
-g++ -std=c++11 -o tolol program.cpp Map.cpp Cell.cpp Player.cpp Position.cpp Engimon.cpp OwnedEngimon.cpp SkillItems.cpp Skill.cpp WildEngimon.cpp

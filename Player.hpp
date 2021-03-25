@@ -12,6 +12,7 @@
 #include "SkillItems.hpp"
 
 #define MAX_EL 15
+#define MAX_EXP 20150
 using namespace std;
 class Player {
     private :
@@ -24,11 +25,10 @@ class Player {
         void initiateSkill();   
 
     public :
+        // Ctor, dtor Player
         Player();
-        // default constructor for player
         Player(string _name);
         ~Player();
-        // dtor
         void operator=(const Player& p);
 
         // Commands
@@ -37,13 +37,11 @@ class Player {
         void changeActiveEngimon();
         void Breed(Engimon& father, Engimon& mother);
         void Battle(Engimon& musuh);
-        // void checkEngimon();
-        // void useItem(SkillItems);
+        void teach(string skillName, string eName);
 
-        // // display
+        // Display
         void displayEngimon(string _name);
-        void MBA();
-        // void detailEngimon();
+        void executeBreed();
 
         // Getter Setter
         OwnedEngimon& getActiveEngimon();
@@ -53,15 +51,14 @@ class Player {
         void activeMati();
         void setPosition(int _x, int _y);
 
+        //In function
         void addToInventory(OwnedEngimon el);
         void addToInventory(SkillItems el);
         void showInventory();
         void showItems();
         void showEngimons();
         void useSkillItems();
-
-        void teach(string skillName, string eName);
-        
+        SkillItems generateSkillItem(string);
 };
 
 #endif

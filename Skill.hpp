@@ -3,9 +3,8 @@
 #include <iostream>
 #include <string>
 using namespace std;
-// #include "OwnedEngimon.hpp"
-// namespace Skill {
-    class Skill {
+
+class Skill {
     private:
         string* element;
         int nElement;
@@ -21,6 +20,7 @@ using namespace std;
         ~Skill();
 
         void addElement(string element);
+        int getNElement();
 
         string* getElement();
         void setElement(string* e, int ne);
@@ -36,9 +36,10 @@ using namespace std;
 
         Skill& getMaxMasteryLevel(Skill&);
 
-        // void learn(OwnedEngimon);
-    };
-// }
-//list of species dengan skillnya
+        void displaySkill();
+
+        bool isCompatibleSkill(string);
+        
+};
 
 #endif

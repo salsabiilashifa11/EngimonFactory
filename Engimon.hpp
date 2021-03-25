@@ -7,7 +7,7 @@
 #include "Skill.hpp"
 #include "ElementAdvantage.hpp"
 using namespace std;
-// namespace EngimonFactory {
+
     class Engimon {
     protected:
         string name;
@@ -19,18 +19,15 @@ using namespace std;
         int level;
         int experience;
         int cumulativeExperience;
-        //mapping species dengan skill unik pake stl
 
     public:
         Engimon();
         Engimon(const Engimon& e);
         Engimon& operator=(const Engimon& e);
-        // Engimon(string name, const Engimon mother, const Engimon father);
         virtual ~Engimon();
         void levelUp();
         void increaseXP(int);
-        //void interact();
-        virtual void displayDetail() = 0;  //berisi semua informasi atribut engimon
+        virtual void displayDetail() = 0;  
         virtual string getStatus() = 0;
         virtual void setStatus(string) = 0;
         //Getter and setter
@@ -67,10 +64,8 @@ using namespace std;
         float getStrongestEl(Engimon& enemy);
 
         void swap(Skill* a, Skill* b);
-        int partition (Skill* arr, int low, int high);
+        int partition(Skill* arr, int low, int high);
         void quickSort(Skill* arr, int low, int high);
     };
-// }
-
 
 #endif

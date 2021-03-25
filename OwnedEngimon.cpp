@@ -1,7 +1,7 @@
 #include "OwnedEngimon.hpp"
 
 
-map<string, string> OwnedEngimon::percakapan = {{"ikan","halo saya api"}, {"kambing","halo saya air"}, {"beruang","halo saya listrik"}, {"kelelawar","halo saya tanah"}, {"kadal","halo saya es"}};
+map<string, string> OwnedEngimon::percakapan = {{"ikan","halo saya api"}, {"kambing","halo saya air"}, {"beruang","halo saya listrik"}, {"kelelawar","halo saya tanah"}, {"kadal","halo saya es"}, {"siamang","halo saya kebakaran"}, {"mammoth", "halo saya LDR"}, {"kecoa", "halo saya subur"}};
 
 OwnedEngimon::OwnedEngimon() : Engimon() {
     this->status = "owned";
@@ -40,17 +40,6 @@ OwnedEngimon::~OwnedEngimon(){
     delete[] parentName;
 }
 
-// OwnedEngimon& OwnedEngimon::operator=(const OwnedEngimon& other){
-//     delete[] parentName;
-//     this->name = other.name;
-//     this->species = other.species; 
-//     this->status = other.status;
-//     this->parentName = new string[2];
-//     this->parentName[0] = other.getParentName()[0];
-//     this->position = other.position;
-
-// }
-
 string* OwnedEngimon::getParentName(){
     return this->parentName;
 }
@@ -78,38 +67,36 @@ void OwnedEngimon::setPosition(int x, int y){
 }
 
 void OwnedEngimon::interact(){
-    // map<string, string> percakapan;
-    // percakapan.insert(pair<string, string> ("fire","halo saya api"));
-    // percakapan.insert(pair<string, string> ("water","halo saya air"));
-    // percakapan.insert(pair<string, string> ("lightning","halo saya listrik"));
-    // percakapan.insert(pair<string, string> ("ground","halo saya tanah"));
-    // percakapan.insert(pair<string, string> ("ice","halo saya es"));
-    cout << percakapan.find(this->species)->second << endl;
+    cout << "[" << this->name << "]: " << percakapan.find(this->species)->second << endl;
 }
 
 void OwnedEngimon::displayDetail(){
-    cout << "Nama : " << this->name << endl;
-    cout << "Species : " << this->species << endl;
-    cout << "Skill : ";
+    cout << "=====================Info Engimon=====================" << endl;
+    cout << "Nama                   : " << this->name << endl;
+    cout << "Species                : " << this->species << endl;
+    cout << "Skill                  : " << endl;
     for (int i = 0; i< this->nSkill; i++){
-        cout << i+1 << ". "; 
-        cout << " NamaSkill : " << this->skill[i].getSkillName();
-        cout << " BasePower : " << this->skill[i].getBasePower();
-        cout << " MasteryLevel : " << this->skill[i].getMasteryLevel() << " ";
+        cout << "    " << i+1 << ". ";
+        this->skill[i].displaySkill();
+        cout << endl;
     }
-    cout << endl;
-    cout << "Element : ";
+    cout << "Element                : ";
     for (int i = 0; i< this->nElements; i++){
         cout << i+1 << ". "; 
         cout << this->elements[i];
+        if (i != this->nElements - 1){
+            cout << " | ";
+        }
     }
     cout << endl;
-    cout << "Level : " << this->level << endl;
-    cout << "Experience : " << this->experience << endl;
-    cout << "CumulativeExperience : " << this->cumulativeExperience << endl;
-    cout << "Parent 1 : " << this->getParentName()[0] << endl;
-    cout << "Parent 2 : " << this->getParentName()[1] << endl;
-    cout << "Status : " << this->status << endl;
+    cout << "Level                  : " << this->level << endl;
+    cout << "Experience             : " << this->experience << endl;
+    cout << "Cumulative Experience  : " << this->cumulativeExperience << endl;
+    cout << "Abi                    : " << this->getParentName()[0] << endl;
+    cout << "Mami                   : " << this->getParentName()[1] << endl;
+    cout << "Status                 : " << this->status << endl;
+    cout << "=======================================================" << endl;
+    
 }
 
 void OwnedEngimon::moveActive(int x, int y){
@@ -139,9 +126,9 @@ bool OwnedEngimon::fight(Engimon& enemy) {
     for (int i = 0; i < enemy.getNSkill(); i++) {
         enemyPower += enemy.getSkill()[i].getBasePower() * enemy.getSkill()[i].getMasteryLevel();
     }
-
-    cout << "My Power : " << myPower << endl;
-    cout << "Enemy Power : " << enemyPower << endl;
+    cout << "======================Info Battle======================" << endl;
+    cout << "My Power       : " << myPower << endl;
+    cout << "Enemy Power    : " << enemyPower << endl;
 
     return myPower > enemyPower;
 }

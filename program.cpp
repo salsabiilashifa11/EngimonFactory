@@ -25,13 +25,14 @@ int main() {
     JumlahEngimonGrassland2 = JumlahEngimon - JumlahEngimonAir - JumlahEngimonGrassland1;
     int j = 0;
     srand (time(0));
+    int countTurn = 0;
     m.updatePlayer(); //Moved here
 
     //Inisialisasi Engimon di air
     for (int i = 0; i < JumlahEngimonAir; i++){
-        posisiX = (rand() % 10);
-        posisiY = (rand() % 10) + 20;
-        lvl = (rand() % 50);
+        posisiX = (rand() % 9) + 1;
+        posisiY = (rand() % 8) + 20;
+        lvl = (rand() % 49) + 1;
         element = (rand() % 2);
         switch (element){
             case 0:
@@ -49,8 +50,8 @@ int main() {
     // Inisialisasi Engimon di Grassland yang bagian atas
     for (int i = 0; i < JumlahEngimonGrassland1; i++){
         posisiX = (rand() % 9) + 1;
-        posisiY = (rand() % 20);
-        lvl = (rand() % 50);
+        posisiY = (rand() % 19) + 1;
+        lvl = (rand() % 49)+1;
         element = (rand() % 3);
         switch (element){
             case 0:
@@ -73,9 +74,9 @@ int main() {
 
     // Inisialisasi Engimon di Grassland yang
     for (int i = 0; i < JumlahEngimonGrassland2; i++){
-        posisiX = (rand() % 20) +10;
-        posisiY = (rand() % 30);
-        lvl = (rand() % 50);
+        posisiX = (rand() % 19) +10;
+        posisiY = (rand() % 29);
+        lvl = (rand() % 49 + 1);
         element = (rand() % 3);
         switch (element){
             case 0:
@@ -96,13 +97,15 @@ int main() {
         j++;
     }
     m.drawMap();
-    m.getCell(0,0).printInfo();
+    
     
     try{
         string command;
         while (true) {
+            m.getPlayer().getPosition().print();
+            cout << "Command : ";
             cin >> command;
-            //cout << endl;  
+            cout << endl;  
             if (command == "w"){
                 m.getPlayer().Move('w');
                 m.updatePlayer();
@@ -121,12 +124,13 @@ int main() {
                 cout << "posisi owned y : " << m.getPlayer().getActiveEngimon().getPosition().getY() << endl;
                 m.updatePlayer();
             }else if (command == "q"){
-                // exit(0);
                 break;
             }else if (command == "display"){
+                cout << endl << "DISPLAY INVENTORY" << endl;
                 p.showInventory();
             }
             else if (command == "battle"){
+                cout << endl << "BATTLE" << endl;
                 if (m.getEnemy().getOccupierP().getName() != ""){
                     cout << "Tidak ada musuh di sekitar player" << endl; 
                 }
@@ -135,47 +139,61 @@ int main() {
                 }
             }
             else if (command == "breed"){
-                p.MBA();
+                cout << endl << "BREED ENGIMON" << endl;
+                p.executeBreed();
             }
             else if (command == "change"){
+                cout << endl << "CHANGE ACTIVE ENGIMON" << endl;
                 p.changeActiveEngimon();
             }
             else if (command == "detail") {
+                cout << endl << "DETAIL ENGIMON" << endl;
                 string namaEngimon;
                 cout << "Masukkan nama engimon: ";
                 cin >> namaEngimon;
-                p.displayEngimon(namaEngimon); //nanti ganti jadi input nama, terus
+                p.displayEngimon(namaEngimon);
             }
             else if (command == "learn") {
+                cout << endl << "USING SKILL ITEMS" << endl;
                 p.showItems();
-                cout << "Pilih nama skill item yang ingin dipakai: ";
+                cout << "Pilih nama skill item yang ingin dipakai : ";
                 string skillName;
                 cin.ignore();
                 std::getline(std::cin, skillName);
                 p.showEngimons();
-                cout << "Pilih nama engimon yang ingin diajari: ";
+                cout << "Pilih nama engimon yang ingin diajari : ";
                 string eName;
                 cin >> eName;
                 p.teach(skillName,eName);
             }
+            else if (command == "interact"){
+                cout << endl << "INTERACT WITH ACTIVE ENGIMON" << endl;
+                p.getActiveEngimon().interact();
+            }
             else{
                 cout<<"Invalid Command"<<endl;
-                // exit(0);
             }
+
+            
+
+            if (countTurn % 4 == 0)
+            {
+                for (int i = 0; i < JumlahEngimon; i++) {
+                    Engimon[i].Move(&m);
+                }
+            }
+
             for (int i = 0; i < JumlahEngimon; i++) {
-                // Engimon[i].Move(&m);
-                Engimon[i].assertPosition(&m); //haruss sebelom drawMap OK
-                // cout << Engimon[i].getName() << endl;
+                Engimon[i].assertPosition(&m);
             }
+            
             m.drawMap();
-            m.getPlayer().getPosition().print();   
-            cout << JumlahEngimon << endl;
+            countTurn++;
+            
         }
     }
-    
     catch (const char* c) {
         cout << "Exception: " << c << endl;
-        // exit(0);
     }
 
     return 0;
