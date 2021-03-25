@@ -111,28 +111,30 @@ void Player::Breed(Engimon& father, Engimon& mother){
             if (father.getSkill()[i].getMasteryLevel() >= mother.getSkill()[j].getMasteryLevel()){
                 for (int l = 0; l < child.getNElements() && child.getNSkill() <= 4; l++){
                     cout << "ini l : " << l << endl;
-                    if (!father.isCorrectElement(child.getElements()[l]) && !child.isMemberSkill(father.getElements()[i])){
+                    if (!father.isCorrectElement(child.getElements()[l]) && !child.isMemberSkill(father.getSkill()[i].getSkillName())){
                         child.addSkill(father.getSkill()[i]);
                         if (!mother.isMemberSkill(father.getSkill()[i].getSkillName())){
                             int skillIdx = mother.findSkillIndex(father.getSkill()[i].getSkillName());
                             if (skillIdx != -1){
+                                int idxAnak = child.findSkillIndex(father.getSkill()[i].getSkillName());
                                 if (father.getSkill()[i].getMasteryLevel() == mother.getSkill()[skillIdx].getMasteryLevel()){   // Kalo levelnya sama
-                                    child.getSkill()[child.getNSkill()-1].setMasteryLevel(father.getSkill()[i].getMasteryLevel() + 1);
+                                    child.getSkill()[idxAnak].setMasteryLevel(father.getSkill()[i].getMasteryLevel() + 1);
                                 } else {    // Kalo levelnya beda
-                                    child.getSkill()[child.getNSkill()-1].setMasteryLevel(max(father.getSkill()[i].getMasteryLevel(), mother.getSkill()[skillIdx].getMasteryLevel()));
+                                    child.getSkill()[idxAnak].setMasteryLevel(max(father.getSkill()[i].getMasteryLevel(), mother.getSkill()[skillIdx].getMasteryLevel()));
                                 }
                             } 
                         }
                         i++;
-                    } else if (!mother.isCorrectElement(child.getElements()[l]) && !child.isMemberSkill(mother.getElements()[j])){
+                    } else if (!mother.isCorrectElement(child.getElements()[l]) && !child.isMemberSkill(mother.getSkill()[j].getSkillName())){
                         child.addSkill(mother.getSkill()[j]);
                         if (!father.isMemberSkill(mother.getSkill()[j].getSkillName())){
                             int skillIdx = father.findSkillIndex(mother.getSkill()[j].getSkillName());
                             if (skillIdx != -1){
+                                int idxAnak = child.findSkillIndex(mother.getSkill()[j].getSkillName());
                                 if (mother.getSkill()[j].getMasteryLevel() == father.getSkill()[skillIdx].getMasteryLevel()){
-                                    child.getSkill()[child.getNSkill()-1].setMasteryLevel(father.getSkill()[i].getMasteryLevel() + 1);
+                                    child.getSkill()[idxAnak].setMasteryLevel(father.getSkill()[i].getMasteryLevel() + 1);
                                 } else {
-                                    child.getSkill()[child.getNSkill()-1].setMasteryLevel((max(father.getSkill()[skillIdx].getMasteryLevel(), mother.getSkill()[j].getMasteryLevel())));
+                                    child.getSkill()[idxAnak].setMasteryLevel((max(father.getSkill()[skillIdx].getMasteryLevel(), mother.getSkill()[j].getMasteryLevel())));
                                 }
                             }
                         }
@@ -144,28 +146,30 @@ void Player::Breed(Engimon& father, Engimon& mother){
                 }
             } else {
                 for (int l = 0; l < child.getNElements() && child.getNSkill() <= 4; l++){
-                    if (!mother.isCorrectElement(child.getElements()[l]) && !child.isMemberSkill(mother.getElements()[j])){
+                    if (!mother.isCorrectElement(child.getElements()[l]) && !child.isMemberSkill(mother.getSkill()[j].getSkillName())){
                         child.addSkill(mother.getSkill()[j]);
                         if (!father.isMemberSkill(mother.getSkill()[j].getSkillName())){
                             int skillIdx = father.findSkillIndex(mother.getSkill()[j].getSkillName());
                             if (skillIdx != -1){
+                                int idxAnak = child.findSkillIndex(mother.getSkill()[j].getSkillName());
                                 if (mother.getSkill()[j].getMasteryLevel() == father.getSkill()[skillIdx].getMasteryLevel()){
-                                    child.getSkill()[child.getNSkill()-1].setMasteryLevel(father.getSkill()[i].getMasteryLevel() + 1);
+                                    child.getSkill()[idxAnak].setMasteryLevel(father.getSkill()[i].getMasteryLevel() + 1);
                                 } else {
-                                    child.getSkill()[child.getNSkill()-1].setMasteryLevel((max(father.getSkill()[skillIdx].getMasteryLevel(), mother.getSkill()[j].getMasteryLevel())));
+                                    child.getSkill()[idxAnak].setMasteryLevel((max(father.getSkill()[skillIdx].getMasteryLevel(), mother.getSkill()[j].getMasteryLevel())));
                                 }
                             }
                         }
                         j++;
-                    } else if (!father.isCorrectElement(child.getElements()[l]) && !child.isMemberSkill(father.getElements()[i])){
+                    } else if (!father.isCorrectElement(child.getElements()[l]) && !child.isMemberSkill(father.getSkill()[i].getSkillName())){
                         child.addSkill(father.getSkill()[i]);
                         if (!mother.isMemberSkill(father.getSkill()[i].getSkillName())){
                             int skillIdx = mother.findSkillIndex(father.getSkill()[i].getSkillName());
                             if (skillIdx != -1){
+                                int idxAnak = child.findSkillIndex(father.getSkill()[i].getSkillName());
                                 if (father.getSkill()[i].getMasteryLevel() == mother.getSkill()[skillIdx].getMasteryLevel()){   // Kalo levelnya sama
-                                    child.getSkill()[child.getNSkill()-1].setMasteryLevel(father.getSkill()[i].getMasteryLevel() + 1);
+                                    child.getSkill()[idxAnak].setMasteryLevel(father.getSkill()[i].getMasteryLevel() + 1);
                                 } else {    // Kalo levelnya beda
-                                    child.getSkill()[child.getNSkill()-1].setMasteryLevel(max(father.getSkill()[i].getMasteryLevel(), mother.getSkill()[skillIdx].getMasteryLevel()));
+                                    child.getSkill()[idxAnak].setMasteryLevel(max(father.getSkill()[i].getMasteryLevel(), mother.getSkill()[skillIdx].getMasteryLevel()));
                                 }
                             } 
                         }
